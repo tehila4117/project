@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClassificationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ConstraintsForPlacementTable">
+          <Key>
+            <PropertyRef Name="InputCodeForPlacement" />
+          </Key>
+          <Property Name="InputCodeForPlacement" Type="bigint" Nullable="false" />
+          <Property Name="InlayCode" Type="bigint" />
+          <Property Name="AuthorCodeForInlay" Type="bigint" />
+          <Property Name="ForcedOptionCode" Type="bigint" />
+          <Property Name="ForWhomTheInlay" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ConstraintsTable">
+          <Key>
+            <PropertyRef Name="ConstraintCode" />
+          </Key>
+          <Property Name="ConstraintCode" Type="bigint" Nullable="false" />
+          <Property Name="NameConstraint" Type="varchar" MaxLength="50" />
+          <Property Name="UserType" Type="bigint" />
+        </EntityType>
+        <EntityType Name="InlayOptionsTable">
+          <Key>
+            <PropertyRef Name="ForcedOptionCode" />
+          </Key>
+          <Property Name="ForcedOptionCode" Type="bigint" Nullable="false" />
+          <Property Name="option" Type="varchar" MaxLength="50" />
+          <Property Name="OptionCode" Type="bigint" />
+        </EntityType>
+        <EntityType Name="InlayTable">
+          <Key>
+            <PropertyRef Name="InlayCode" />
+          </Key>
+          <Property Name="InlayCode" Type="bigint" Nullable="false" />
+          <Property Name="InlayName" Type="varchar" MaxLength="50" />
+          <Property Name="PlacementDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstitutionsTables">
+          <Key>
+            <PropertyRef Name="InstitutionCode" />
+          </Key>
+          <Property Name="InstitutionCode" Type="bigint" Nullable="false" />
+          <Property Name="InstitutionName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UsersTable">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="bigint" />
+          <Property Name="Miles" Type="varchar" MaxLength="50" />
+          <Property Name="UserType" Type="bigint" />
+          <Property Name="InstitutionCode" Type="bigint" />
+        </EntityType>
+        <EntityType Name="UserTypesTable">
+          <Key>
+            <PropertyRef Name="UserTypeCode" />
+          </Key>
+          <Property Name="UserTypeCode" Type="bigint" Nullable="false" />
+          <Property Name="UsernameType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3">
+          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InlayOptionsTable">
+              <PropertyRef Name="ForcedOptionCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="ForcedOptionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsForPlacementTable_InlayTable1">
+          <End Role="InlayTable" Type="Self.InlayTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InlayTable">
+              <PropertyRef Name="InlayCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="AuthorCodeForInlay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsForPlacementTable_UsersTable1">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="ForWhomTheInlay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsForPlacementTable_UsersTable2">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="AuthorCodeForInlay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsTable_UserTypesTable">
+          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="0..1" />
+          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypesTable">
+              <PropertyRef Name="UserTypeCode" />
+            </Principal>
+            <Dependent Role="ConstraintsTable">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InlayOptionsTable_ConstraintsTable1">
+          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="0..1" />
+          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConstraintsTable">
+              <PropertyRef Name="ConstraintCode" />
+            </Principal>
+            <Dependent Role="InlayOptionsTable">
+              <PropertyRef Name="OptionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTable_InstitutionsTables">
+          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstitutionsTables">
+              <PropertyRef Name="InstitutionCode" />
+            </Principal>
+            <Dependent Role="UsersTable">
+              <PropertyRef Name="InstitutionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTable_UserTypesTable">
+          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="0..1" />
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypesTable">
+              <PropertyRef Name="UserTypeCode" />
+            </Principal>
+            <Dependent Role="UsersTable">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClassificationModelStoreContainer">
+          <EntitySet Name="ConstraintsForPlacementTable" EntityType="Self.ConstraintsForPlacementTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConstraintsTable" EntityType="Self.ConstraintsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InlayOptionsTable" EntityType="Self.InlayOptionsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InlayTable" EntityType="Self.InlayTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstitutionsTables" EntityType="Self.InstitutionsTables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTypesTable" EntityType="Self.UserTypesTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3" Association="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3">
+            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayTable1" Association="Self.FK_ConstraintsForPlacementTable_InlayTable1">
+            <End Role="InlayTable" EntitySet="InlayTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable1" Association="Self.FK_ConstraintsForPlacementTable_UsersTable1">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable2" Association="Self.FK_ConstraintsForPlacementTable_UsersTable2">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsTable_UserTypesTable" Association="Self.FK_ConstraintsTable_UserTypesTable">
+            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
+            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InlayOptionsTable_ConstraintsTable1" Association="Self.FK_InlayOptionsTable_ConstraintsTable1">
+            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
+            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTable_InstitutionsTables" Association="Self.FK_UsersTable_InstitutionsTables">
+            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
+            <End Role="UsersTable" EntitySet="UsersTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTable_UserTypesTable" Association="Self.FK_UsersTable_UserTypesTable">
+            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
+            <End Role="UsersTable" EntitySet="UsersTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClassificationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ConstraintsForPlacementTable">
+          <Key>
+            <PropertyRef Name="InputCodeForPlacement" />
+          </Key>
+          <Property Name="InputCodeForPlacement" Type="Int64" Nullable="false" />
+          <Property Name="InlayCode" Type="Int64" />
+          <Property Name="AuthorCodeForInlay" Type="Int64" />
+          <Property Name="ForcedOptionCode" Type="Int64" />
+          <Property Name="ForWhomTheInlay" Type="Int64" />
+          <NavigationProperty Name="InlayOptionsTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3" FromRole="ConstraintsForPlacementTable" ToRole="InlayOptionsTable" />
+          <NavigationProperty Name="InlayTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayTable1" FromRole="ConstraintsForPlacementTable" ToRole="InlayTable" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable1" FromRole="ConstraintsForPlacementTable" ToRole="UsersTable" />
+          <NavigationProperty Name="UsersTable1" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable2" FromRole="ConstraintsForPlacementTable" ToRole="UsersTable" />
+        </EntityType>
+        <EntityType Name="ConstraintsTable">
+          <Key>
+            <PropertyRef Name="ConstraintCode" />
+          </Key>
+          <Property Name="ConstraintCode" Type="Int64" Nullable="false" />
+          <Property Name="NameConstraint" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="Int64" />
+          <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_ConstraintsTable_UserTypesTable" FromRole="ConstraintsTable" ToRole="UserTypesTable" />
+          <NavigationProperty Name="InlayOptionsTable" Relationship="Self.FK_InlayOptionsTable_ConstraintsTable1" FromRole="ConstraintsTable" ToRole="InlayOptionsTable" />
+        </EntityType>
+        <EntityType Name="InlayOptionsTable">
+          <Key>
+            <PropertyRef Name="ForcedOptionCode" />
+          </Key>
+          <Property Name="ForcedOptionCode" Type="Int64" Nullable="false" />
+          <Property Name="option" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OptionCode" Type="Int64" />
+          <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3" FromRole="InlayOptionsTable" ToRole="ConstraintsForPlacementTable" />
+          <NavigationProperty Name="ConstraintsTable" Relationship="Self.FK_InlayOptionsTable_ConstraintsTable1" FromRole="InlayOptionsTable" ToRole="ConstraintsTable" />
+        </EntityType>
+        <EntityType Name="InlayTable">
+          <Key>
+            <PropertyRef Name="InlayCode" />
+          </Key>
+          <Property Name="InlayCode" Type="Int64" Nullable="false" />
+          <Property Name="InlayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlacementDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayTable1" FromRole="InlayTable" ToRole="ConstraintsForPlacementTable" />
+        </EntityType>
+        <EntityType Name="InstitutionsTables">
+          <Key>
+            <PropertyRef Name="InstitutionCode" />
+          </Key>
+          <Property Name="InstitutionCode" Type="Int64" Nullable="false" />
+          <Property Name="InstitutionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.FK_UsersTable_InstitutionsTables" FromRole="InstitutionsTables" ToRole="UsersTable" />
+        </EntityType>
+        <EntityType Name="UsersTable">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="Int64" />
+          <Property Name="Miles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="Int64" />
+          <Property Name="InstitutionCode" Type="Int64" />
+          <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable1" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
+          <NavigationProperty Name="ConstraintsForPlacementTable1" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable2" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
+          <NavigationProperty Name="InstitutionsTables" Relationship="Self.FK_UsersTable_InstitutionsTables" FromRole="UsersTable" ToRole="InstitutionsTables" />
+          <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_UsersTable_UserTypesTable" FromRole="UsersTable" ToRole="UserTypesTable" />
+        </EntityType>
+        <EntityType Name="UserTypesTable">
+          <Key>
+            <PropertyRef Name="UserTypeCode" />
+          </Key>
+          <Property Name="UserTypeCode" Type="Int64" Nullable="false" />
+          <Property Name="UsernameType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ConstraintsTable" Relationship="Self.FK_ConstraintsTable_UserTypesTable" FromRole="UserTypesTable" ToRole="ConstraintsTable" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.FK_UsersTable_UserTypesTable" FromRole="UserTypesTable" ToRole="UsersTable" />
+        </EntityType>
+        <Association Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3">
+          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InlayOptionsTable">
+              <PropertyRef Name="ForcedOptionCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="ForcedOptionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsForPlacementTable_InlayTable1">
+          <End Role="InlayTable" Type="Self.InlayTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InlayTable">
+              <PropertyRef Name="InlayCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="AuthorCodeForInlay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsForPlacementTable_UsersTable1">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="ForWhomTheInlay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsForPlacementTable_UsersTable2">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
+          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="ConstraintsForPlacementTable">
+              <PropertyRef Name="AuthorCodeForInlay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstraintsTable_UserTypesTable">
+          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="0..1" />
+          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypesTable">
+              <PropertyRef Name="UserTypeCode" />
+            </Principal>
+            <Dependent Role="ConstraintsTable">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InlayOptionsTable_ConstraintsTable1">
+          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="0..1" />
+          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConstraintsTable">
+              <PropertyRef Name="ConstraintCode" />
+            </Principal>
+            <Dependent Role="InlayOptionsTable">
+              <PropertyRef Name="OptionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTable_InstitutionsTables">
+          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstitutionsTables">
+              <PropertyRef Name="InstitutionCode" />
+            </Principal>
+            <Dependent Role="UsersTable">
+              <PropertyRef Name="InstitutionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTable_UserTypesTable">
+          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="0..1" />
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypesTable">
+              <PropertyRef Name="UserTypeCode" />
+            </Principal>
+            <Dependent Role="UsersTable">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClassificationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ConstraintsForPlacementTable" EntityType="Self.ConstraintsForPlacementTable" />
+          <EntitySet Name="ConstraintsTable" EntityType="Self.ConstraintsTable" />
+          <EntitySet Name="InlayOptionsTable" EntityType="Self.InlayOptionsTable" />
+          <EntitySet Name="InlayTable" EntityType="Self.InlayTable" />
+          <EntitySet Name="InstitutionsTables" EntityType="Self.InstitutionsTables" />
+          <EntitySet Name="UsersTable" EntityType="Self.UsersTable" />
+          <EntitySet Name="UserTypesTable" EntityType="Self.UserTypesTable" />
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3" Association="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3">
+            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayTable1" Association="Self.FK_ConstraintsForPlacementTable_InlayTable1">
+            <End Role="InlayTable" EntitySet="InlayTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable1" Association="Self.FK_ConstraintsForPlacementTable_UsersTable1">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable2" Association="Self.FK_ConstraintsForPlacementTable_UsersTable2">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstraintsTable_UserTypesTable" Association="Self.FK_ConstraintsTable_UserTypesTable">
+            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
+            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InlayOptionsTable_ConstraintsTable1" Association="Self.FK_InlayOptionsTable_ConstraintsTable1">
+            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
+            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTable_InstitutionsTables" Association="Self.FK_UsersTable_InstitutionsTables">
+            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
+            <End Role="UsersTable" EntitySet="UsersTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTable_UserTypesTable" Association="Self.FK_UsersTable_UserTypesTable">
+            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
+            <End Role="UsersTable" EntitySet="UsersTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClassificationModelStoreContainer" CdmEntityContainer="ClassificationEntities">
+          <EntitySetMapping Name="ConstraintsForPlacementTable">
+            <EntityTypeMapping TypeName="ClassificationModel.ConstraintsForPlacementTable">
+              <MappingFragment StoreEntitySet="ConstraintsForPlacementTable">
+                <ScalarProperty Name="InputCodeForPlacement" ColumnName="InputCodeForPlacement" />
+                <ScalarProperty Name="InlayCode" ColumnName="InlayCode" />
+                <ScalarProperty Name="AuthorCodeForInlay" ColumnName="AuthorCodeForInlay" />
+                <ScalarProperty Name="ForcedOptionCode" ColumnName="ForcedOptionCode" />
+                <ScalarProperty Name="ForWhomTheInlay" ColumnName="ForWhomTheInlay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConstraintsTable">
+            <EntityTypeMapping TypeName="ClassificationModel.ConstraintsTable">
+              <MappingFragment StoreEntitySet="ConstraintsTable">
+                <ScalarProperty Name="ConstraintCode" ColumnName="ConstraintCode" />
+                <ScalarProperty Name="NameConstraint" ColumnName="NameConstraint" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InlayOptionsTable">
+            <EntityTypeMapping TypeName="ClassificationModel.InlayOptionsTable">
+              <MappingFragment StoreEntitySet="InlayOptionsTable">
+                <ScalarProperty Name="ForcedOptionCode" ColumnName="ForcedOptionCode" />
+                <ScalarProperty Name="option" ColumnName="option" />
+                <ScalarProperty Name="OptionCode" ColumnName="OptionCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InlayTable">
+            <EntityTypeMapping TypeName="ClassificationModel.InlayTable">
+              <MappingFragment StoreEntitySet="InlayTable">
+                <ScalarProperty Name="InlayCode" ColumnName="InlayCode" />
+                <ScalarProperty Name="InlayName" ColumnName="InlayName" />
+                <ScalarProperty Name="PlacementDate" ColumnName="PlacementDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstitutionsTables">
+            <EntityTypeMapping TypeName="ClassificationModel.InstitutionsTables">
+              <MappingFragment StoreEntitySet="InstitutionsTables">
+                <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
+                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersTable">
+            <EntityTypeMapping TypeName="ClassificationModel.UsersTable">
+              <MappingFragment StoreEntitySet="UsersTable">
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Miles" ColumnName="Miles" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypesTable">
+            <EntityTypeMapping TypeName="ClassificationModel.UserTypesTable">
+              <MappingFragment StoreEntitySet="UserTypesTable">
+                <ScalarProperty Name="UserTypeCode" ColumnName="UserTypeCode" />
+                <ScalarProperty Name="UsernameType" ColumnName="UsernameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

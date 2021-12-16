@@ -4,16 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
-using Models;
-namespace MusicCompositionDAL
+
+
+namespace DAL
 {
     public class DBConection
     {
         public DBConection() { }
         public List<T> GetDbSet<T>() where T : class
         {
-            using (ClassificationEntities db = new ClassificationEntities())
+            using (ClassificationEntities1 db = new ClassificationEntities1())
             {
                 return db.GetDbSet<T>().ToList();
             }
@@ -26,7 +26,7 @@ namespace MusicCompositionDAL
         }
         public void Execute<T>(T entity, ExecuteActions exAction) where T : class
         {
-            using (ClassificationEntities db = new ClassificationEntities())
+            using (ClassificationEntities1 db = new ClassificationEntities1())
             {
                 var model = db.Set<T>();
                 switch (exAction)

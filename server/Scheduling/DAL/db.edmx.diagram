@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8dec75329d3845efbec75b7e5f9480d7" Name="Diagram1">
-        <EntityTypeShape EntityType="ClassificationModel.ConstraintsForPlacementTable" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.ConstraintsTable" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InlayOptionsTable" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.ConstraintsForPlacementTable" Width="2.75" PointX="9.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.ConstraintsTable" Width="2.875" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.InlayOptionsTable" Width="3.125" PointX="6.5" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ClassificationModel.InlayTable" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InstitutionsTables" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.InstitutionsTables" Width="1.875" PointX="0.5" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ClassificationModel.UsersTable" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ClassificationModel.UserTypesTable" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_InlayOptionsTable3" ManuallyRouted="false" />
@@ -20,6 +20,8 @@
         <AssociationConnector Association="ClassificationModel.FK_InlayOptionsTable_ConstraintsTable1" ManuallyRouted="false" />
         <AssociationConnector Association="ClassificationModel.FK_UsersTable_InstitutionsTables" ManuallyRouted="false" />
         <AssociationConnector Association="ClassificationModel.FK_UsersTable_UserTypesTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClassificationModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" />
+        <AssociationConnector Association="ClassificationModel.FK__Constrain__Insti__6E01572D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

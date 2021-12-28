@@ -18,6 +18,7 @@ namespace DAL
         public InstitutionsTables()
         {
             this.UsersTable = new HashSet<UsersTable>();
+            this.ConstraintsTable = new HashSet<ConstraintsTable>();
         }
     
         public long InstitutionCode { get; set; }
@@ -25,5 +26,7 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersTable> UsersTable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ConstraintsTable> ConstraintsTable { get; set; }
     }
 }

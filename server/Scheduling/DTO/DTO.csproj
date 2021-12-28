@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{156623FD-8EA7-4E4A-8792-C5420819905B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>trial</RootNamespace>
-    <AssemblyName>trial</AssemblyName>
+    <ProjectGuid>{AC321FA5-EDFF-4D43-8556-7BA5FC8BDB32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DTO</RootNamespace>
+    <AssemblyName>DTO</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,12 +42,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Constraints.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DTOConstraintsForPlacementTable.cs" />
+    <Compile Include="DTOConstraintsTable.cs" />
+    <Compile Include="DTOInlayOptionsTable.cs" />
+    <Compile Include="DTOInlayTable.cs" />
+    <Compile Include="DTOInstitutionsTables.cs" />
+    <Compile Include="DTOUsersTable.cs" />
+    <Compile Include="DTOUserTypesTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{c79facbb-bb6e-4b62-bc17-e51a7b9b7db5}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

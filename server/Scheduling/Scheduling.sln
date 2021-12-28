@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "trial", "trial\trial.csproj", "{156623FD-8EA7-4E4A-8792-C5420819905B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{AC321FA5-EDFF-4D43-8556-7BA5FC8BDB32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{156623FD-8EA7-4E4A-8792-C5420819905B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{156623FD-8EA7-4E4A-8792-C5420819905B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{156623FD-8EA7-4E4A-8792-C5420819905B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC321FA5-EDFF-4D43-8556-7BA5FC8BDB32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC321FA5-EDFF-4D43-8556-7BA5FC8BDB32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC321FA5-EDFF-4D43-8556-7BA5FC8BDB32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC321FA5-EDFF-4D43-8556-7BA5FC8BDB32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

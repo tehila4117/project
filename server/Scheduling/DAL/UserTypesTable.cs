@@ -21,7 +21,7 @@ namespace DAL
             this.UsersTable = new HashSet<UsersTable>();
         }
     
-        public long UserTypeCode { get; set; }
+        public string UserTypeCode { get; set; }
         public string UsernameType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

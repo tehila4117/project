@@ -25,7 +25,7 @@ namespace DAL
         public string UserName { get; set; }
         public Nullable<long> Password { get; set; }
         public string Miles { get; set; }
-        public Nullable<long> UserType { get; set; }
+        public string UserType { get; set; }
         public Nullable<long> InstitutionCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -9,7 +9,7 @@ namespace DTO
 {
     public class DTOUserTypesTable
     {
-        public long UserTypeCode { get; set; }
+        public string UserTypeCode { get; set; }
         public string UsernameType { get; set; }
 
         public DTOUserTypesTable()
@@ -21,6 +21,29 @@ namespace DTO
         {
             this.UserTypeCode = u.UserTypeCode;
             this.UsernameType = u.UsernameType;
+        }
+
+        public UserTypesTable FromDtoToTable(DTOUserTypesTable u)
+        {
+            UserTypesTable UserType = new UserTypesTable();
+            UserType.UserTypeCode = u.UserTypeCode;
+            UserType.UsernameType = u.UsernameType;
+            return UserType;
+        }
+
+
+
+
+        public static List<DTOUserTypesTable> CreatDtoList(List<UserTypesTable> LIST)
+        {
+            List<DTOUserTypesTable> dtolist = new List<DTOUserTypesTable>();
+            foreach (var c in LIST)
+            {
+                DTOUserTypesTable dtoUserTypesTable = new DTOUserTypesTable(c);
+                dtolist.Add(dtoUserTypesTable);
+            }
+            return dtolist;
+
         }
     }
 }

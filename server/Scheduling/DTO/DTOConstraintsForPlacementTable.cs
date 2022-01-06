@@ -27,6 +27,19 @@ namespace DTO
             this.ForcedOptionCode = (long)c.ForcedOptionCode;
             this.ForWhomTheInlay = (long)c.ForWhomTheInlay;
         }
+
+        public  ConstraintsForPlacementTable FromDtoToTable(DTOConstraintsForPlacementTable c)
+        {
+            ConstraintsForPlacementTable Constraint = new ConstraintsForPlacementTable();
+            Constraint.InputCodeForPlacement =InputCodeForPlacement;
+            Constraint.InlayCode =InlayCode;
+            Constraint.AuthorCodeForInlay =AuthorCodeForInlay;
+            Constraint.ForcedOptionCode =ForcedOptionCode;
+            Constraint.ForWhomTheInlay =ForWhomTheInlay;
+            return Constraint;
+        }
+
+
         public static List<DTOConstraintsForPlacementTable> CreatDtoList(List<ConstraintsForPlacementTable> LIST)
         {
              List<DTOConstraintsForPlacementTable> dtolist = new List<DTOConstraintsForPlacementTable>();

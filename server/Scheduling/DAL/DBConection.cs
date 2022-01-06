@@ -13,7 +13,7 @@ namespace DAL
         public DBConection() { }
         public List<T> GetDbSet<T>() where T : class
         {
-            using (ClassificationEntities1 db = new ClassificationEntities1())
+            using (ClassificationEntities db = new ClassificationEntities())
             {
                 return db.GetDbSet<T>().ToList();
             }
@@ -26,7 +26,7 @@ namespace DAL
         }
         public void Execute<T>(T entity, ExecuteActions exAction) where T : class
         {
-            using (ClassificationEntities1 db = new ClassificationEntities1())
+            using (ClassificationEntities db = new ClassificationEntities())
             {
                 var model = db.Set<T>();
                 switch (exAction)

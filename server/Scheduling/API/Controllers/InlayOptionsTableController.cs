@@ -8,27 +8,26 @@ using DTO;
 
 namespace API.Controllers
 {
-    public class DefaultController : ApiController
+    public class InlayOptionsTableController : ApiController
     {
 
-
-        public List<DTOConstraintsTable> GetallConstraints()
+        public List<DTOInlayOptionsTable> GetallInlayOptions()
         {
-            List<DTOConstraintsTable> list = BL.Default.GetallConstraints();
+            List<DTOInlayOptionsTable> list = BL.ManagerInlayOptionsTable.GetallInlayOptions();
             return list;
         }
 
-        // POST: api/Default
+        // POST: api/DTOInlayOptionsTable
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Default/5
+        // PUT: api/DTOInlayOptionsTable/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Default/5
+        // DELETE: api/DTOInlayOptionsTable/5
         public void Delete(int id)
         {
         }

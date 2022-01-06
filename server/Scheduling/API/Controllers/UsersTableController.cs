@@ -1,34 +1,32 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using DTO;
 
 namespace API.Controllers
 {
-    public class DefaultController : ApiController
-    {
-
-
-        public List<DTOConstraintsTable> GetallConstraints()
-        {
-            List<DTOConstraintsTable> list = BL.Default.GetallConstraints();
+    public class UsersTableController : ApiController
+    {//api/UsersTable/GetallUsers
+           public List<DTOUsersTable> GetallUsers()
+           {
+            List<DTOUsersTable> list = BL.ManagerUsersTable.GetallUsers();
             return list;
-        }
+           }
 
-        // POST: api/Default
+        // POST: api/DTOUsersTable
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Default/5
+        // PUT: api/DTOUsersTable/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Default/5
+        // DELETE: api/DTOUsersTable/5
         public void Delete(int id)
         {
         }

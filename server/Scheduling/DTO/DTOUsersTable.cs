@@ -13,7 +13,7 @@ namespace DTO
         public string UserName { get; set; }
         public long Password { get; set; }
         public string Miles { get; set; }
-        public long UserType { get; set; }
+        public string UserType { get; set; }
         public long InstitutionCode { get; set; }
 
 
@@ -28,8 +28,34 @@ namespace DTO
             this.UserName = u.UserName;
             this.Password = (long)u.Password;
             this.Miles = u.Miles;
-            this.UserType = (long)u.UserType;
+            this.UserType = u.UserType;
             this.InstitutionCode = (long)u.InstitutionCode;
+
+        }
+
+        public UsersTable FromDtoToTable(DTOUsersTable u)
+        {
+            UsersTable Users = new UsersTable();
+            Users.UserCode =UserCode;
+            Users.UserName =UserName;
+            Users.Password = Password;
+            Users.Miles =Miles;
+            Users.UserType =UserType;
+            Users.InstitutionCode = InstitutionCode;
+            return Users;
+
+        }
+
+
+        public static List<DTOUsersTable> CreatDtoList(List<UsersTable> LIST)
+        {
+            List<DTOUsersTable> dtolist = new List<DTOUsersTable>();
+            foreach (var c in LIST)
+            {
+                DTOUsersTable dtoUsersTable = new DTOUsersTable(c);
+                dtolist.Add(dtoUsersTable);
+            }
+            return dtolist;
 
         }
     }

@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ClassificationEntities1 : DbContext
+    public partial class ClassificationEntities : DbContext
     {
-        public ClassificationEntities1()
-            : base("name=ClassificationEntities1")
+        public ClassificationEntities()
+            : base("name=ClassificationEntities")
         {
         }
     
@@ -30,13 +30,14 @@ namespace DAL
         public virtual DbSet<InlayOptionsTable> InlayOptionsTable { get; set; }
         public virtual DbSet<InlayTable> InlayTable { get; set; }
         public virtual DbSet<InstitutionsTables> InstitutionsTables { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UsersTable> UsersTable { get; set; }
         public virtual DbSet<UserTypesTable> UserTypesTable { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
         public DbSet<T> GetDbSet<T>() where T : class
         {
             return this.Set<T>();
         }
+
     }
 }

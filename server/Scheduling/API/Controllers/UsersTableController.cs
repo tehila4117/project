@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using DAL;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,11 @@ namespace API.Controllers
             return list;
            }
 
-        // POST: api/DTOUsersTable
-        public void Post([FromBody]string value)
+        
+        // POST: api/DTOUsersTable/postSingUp
+        public UsersTable PostSingUp([FromBody]DTOUsersTable user)
         {
+            return BL.ManagerUsersTable.SingUp(user);
         }
 
         // PUT: api/DTOUsersTable/5

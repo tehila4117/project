@@ -33,7 +33,7 @@ namespace DTO
 
         }
 
-        public UsersTable FromDtoToTable(DTOUsersTable u)
+        public UsersTable FromDtoToTable()
         {
             UsersTable Users = new UsersTable();
             Users.UserCode =UserCode;

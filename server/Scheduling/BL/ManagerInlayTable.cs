@@ -8,7 +8,7 @@ using DTO;
 
 namespace BL
 {
-    class ManagerInlayTable
+    public class ManagerInlayTable
     {
         static DBConection db = new DBConection();
         public static List<DTOInlayTable> GetallInlay()

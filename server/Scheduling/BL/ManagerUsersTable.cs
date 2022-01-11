@@ -8,7 +8,7 @@ using DTO;
 
 namespace BL
 {
-  public  class ManagerUsersTable
+    public class ManagerUsersTable
     {
 
         static DBConection db = new DBConection();
@@ -19,5 +19,12 @@ namespace BL
             List<DTOUsersTable> dtoList = DTOUsersTable.CreatDtoList(list);
             return dtoList;
         }
-    }
+
+        public static UsersTable SingUp(DTOUsersTable user)
+        {
+            UsersTable u = user.FromDtoToTable();
+            db.Execute<UsersTable>(u, DBConection.ExecuteActions.Insert);
+            return u;
+        }
+  }
 }

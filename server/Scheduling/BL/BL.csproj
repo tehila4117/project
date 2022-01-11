@@ -58,6 +58,7 @@
     <Compile Include="ManagerInstitutionsTables.cs" />
     <Compile Include="ManagerUsersTable.cs" />
     <Compile Include="ManagerUserTypesTable.cs" />
+    <Compile Include="Model\UserDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

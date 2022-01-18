@@ -8,10 +8,10 @@ using DTO;
 
 namespace BL.Model
 {
-    class UserDetails
+    public class UserDetails
     {
-      public  string UserName;
-       public string UserPassword;
+      public string UserName { get; set; }
+       public String Password { get; set; }
 
         public UserDetails()
         {

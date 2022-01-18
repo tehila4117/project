@@ -23,7 +23,7 @@ namespace DAL
     
         public long UserCode { get; set; }
         public string UserName { get; set; }
-        public Nullable<long> Password { get; set; }
+        public string Password { get; set; }
         public string Miles { get; set; }
         public string UserType { get; set; }
         public Nullable<long> InstitutionCode { get; set; }
@@ -32,7 +32,6 @@ namespace DAL
         public virtual ICollection<ConstraintsForPlacementTable> ConstraintsForPlacementTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConstraintsForPlacementTable> ConstraintsForPlacementTable1 { get; set; }
-        public virtual InstitutionsTables InstitutionsTables { get; set; }
         public virtual UserTypesTable UserTypesTable { get; set; }
     }
 }

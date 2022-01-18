@@ -11,7 +11,7 @@ namespace DTO
     {
         public long UserCode { get; set; }
         public string UserName { get; set; }
-        public long Password { get; set; }
+        public string Password { get; set; }
         public string Miles { get; set; }
         public string UserType { get; set; }
         public long InstitutionCode { get; set; }
@@ -26,7 +26,7 @@ namespace DTO
         {
             this.UserCode = u.UserCode;
             this.UserName = u.UserName;
-            this.Password = (long)u.Password;
+            this.Password = u.Password;
             this.Miles = u.Miles;
             this.UserType = u.UserType;
             this.InstitutionCode = (long)u.InstitutionCode;

@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BL.Model;
+using DAL;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,16 @@ namespace API.Controllers
 
         
         // POST: api/DTOUsersTable/postSingUp
-        public UsersTable PostSingUp([FromBody]DTOUsersTable user)
+        [HttpPost]
+        [Route("api/UsersTable/PostSingUp")]
+        public Object PostSignUp([FromBody]DTOUsersTable user)
         {
-            return BL.ManagerUsersTable.SingUp(user);
+            return BL.ManagerUsersTable.SignUp(user);
+        }
+
+        public Object  PostSignIn([FromBody] UserDetails ud)
+        {
+            return BL.ManagerUsersTable.SignIn(ud);
         }
 
         // PUT: api/DTOUsersTable/5

@@ -25,7 +25,6 @@ namespace DAL
         public string UserType { get; set; }
         public Nullable<long> InstitutionCode { get; set; }
     
-        public virtual InstitutionsTables InstitutionsTables { get; set; }
         public virtual UserTypesTable UserTypesTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InlayOptionsTable> InlayOptionsTable { get; set; }

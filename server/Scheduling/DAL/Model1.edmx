@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="InputCodeForPlacement" />
           </Key>
-          <Property Name="InputCodeForPlacement" Type="bigint" Nullable="false" />
+          <Property Name="InputCodeForPlacement" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InlayCode" Type="bigint" />
           <Property Name="AuthorCodeForInlay" Type="bigint" />
           <Property Name="ForcedOptionCode" Type="bigint" />
@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="ConstraintCode" />
           </Key>
-          <Property Name="ConstraintCode" Type="bigint" Nullable="false" />
+          <Property Name="ConstraintCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameConstraint" Type="varchar" MaxLength="50" />
           <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="InstitutionCode" Type="bigint" />
@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="ForcedOptionCode" />
           </Key>
-          <Property Name="ForcedOptionCode" Type="bigint" Nullable="false" />
+          <Property Name="ForcedOptionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="option" Type="varchar" MaxLength="50" />
           <Property Name="OptionCode" Type="bigint" />
         </EntityType>
@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="InlayCode" />
           </Key>
-          <Property Name="InlayCode" Type="bigint" Nullable="false" />
+          <Property Name="InlayCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InlayName" Type="varchar" MaxLength="50" />
           <Property Name="PlacementDate" Type="date" Nullable="false" />
         </EntityType>
@@ -44,7 +44,7 @@
           <Key>
             <PropertyRef Name="InstitutionCode" />
           </Key>
-          <Property Name="InstitutionCode" Type="bigint" Nullable="false" />
+          <Property Name="InstitutionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InstitutionName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -63,7 +63,7 @@
           </Key>
           <Property Name="UserCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="bigint" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="Miles" Type="varchar" MaxLength="50" />
           <Property Name="UserType" Type="varchar" MaxLength="50" />
           <Property Name="InstitutionCode" Type="bigint" />
@@ -75,18 +75,6 @@
           <Property Name="UserTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UsernameType" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Constrain__Insti__6E01572D">
-          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
-          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InstitutionsTables">
-              <PropertyRef Name="InstitutionCode" />
-            </Principal>
-            <Dependent Role="ConstraintsTable">
-              <PropertyRef Name="InstitutionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3">
           <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="0..1" />
           <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
@@ -159,18 +147,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UsersTable_InstitutionsTables">
-          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InstitutionsTables">
-              <PropertyRef Name="InstitutionCode" />
-            </Principal>
-            <Dependent Role="UsersTable">
-              <PropertyRef Name="InstitutionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UsersTable_UserTypesTable">
           <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="0..1" />
           <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
@@ -192,10 +168,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypesTable" EntityType="Self.UserTypesTable" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Constrain__Insti__6E01572D" Association="Self.FK__Constrain__Insti__6E01572D">
-            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
-            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3" Association="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3">
             <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
             <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
@@ -220,10 +192,6 @@
             <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
             <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
           </AssociationSet>
-          <AssociationSet Name="FK_UsersTable_InstitutionsTables" Association="Self.FK_UsersTable_InstitutionsTables">
-            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
-            <End Role="UsersTable" EntitySet="UsersTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_UsersTable_UserTypesTable" Association="Self.FK_UsersTable_UserTypesTable">
             <End Role="UserTypesTable" EntitySet="UserTypesTable" />
             <End Role="UsersTable" EntitySet="UsersTable" />
@@ -238,7 +206,7 @@
           <Key>
             <PropertyRef Name="InputCodeForPlacement" />
           </Key>
-          <Property Name="InputCodeForPlacement" Type="Int64" Nullable="false" />
+          <Property Name="InputCodeForPlacement" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InlayCode" Type="Int64" />
           <Property Name="AuthorCodeForInlay" Type="Int64" />
           <Property Name="ForcedOptionCode" Type="Int64" />
@@ -252,11 +220,10 @@
           <Key>
             <PropertyRef Name="ConstraintCode" />
           </Key>
-          <Property Name="ConstraintCode" Type="Int64" Nullable="false" />
+          <Property Name="ConstraintCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameConstraint" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="InstitutionCode" Type="Int64" />
-          <NavigationProperty Name="InstitutionsTables" Relationship="Self.FK__Constrain__Insti__6E01572D" FromRole="ConstraintsTable" ToRole="InstitutionsTables" />
           <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_ConstraintsTable_UserTypesTable" FromRole="ConstraintsTable" ToRole="UserTypesTable" />
           <NavigationProperty Name="InlayOptionsTable" Relationship="Self.FK_InlayOptionsTable_ConstraintsTable1" FromRole="ConstraintsTable" ToRole="InlayOptionsTable" />
         </EntityType>
@@ -264,7 +231,7 @@
           <Key>
             <PropertyRef Name="ForcedOptionCode" />
           </Key>
-          <Property Name="ForcedOptionCode" Type="Int64" Nullable="false" />
+          <Property Name="ForcedOptionCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="option" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OptionCode" Type="Int64" />
           <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3" FromRole="InlayOptionsTable" ToRole="ConstraintsForPlacementTable" />
@@ -274,7 +241,7 @@
           <Key>
             <PropertyRef Name="InlayCode" />
           </Key>
-          <Property Name="InlayCode" Type="Int64" Nullable="false" />
+          <Property Name="InlayCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InlayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PlacementDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayTable1" FromRole="InlayTable" ToRole="ConstraintsForPlacementTable" />
@@ -283,10 +250,8 @@
           <Key>
             <PropertyRef Name="InstitutionCode" />
           </Key>
-          <Property Name="InstitutionCode" Type="Int64" Nullable="false" />
+          <Property Name="InstitutionCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InstitutionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ConstraintsTable" Relationship="Self.FK__Constrain__Insti__6E01572D" FromRole="InstitutionsTables" ToRole="ConstraintsTable" />
-          <NavigationProperty Name="UsersTable" Relationship="Self.FK_UsersTable_InstitutionsTables" FromRole="InstitutionsTables" ToRole="UsersTable" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -304,13 +269,12 @@
           </Key>
           <Property Name="UserCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="Int64" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Miles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="InstitutionCode" Type="Int64" />
           <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable1" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
           <NavigationProperty Name="ConstraintsForPlacementTable1" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable2" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
-          <NavigationProperty Name="InstitutionsTables" Relationship="Self.FK_UsersTable_InstitutionsTables" FromRole="UsersTable" ToRole="InstitutionsTables" />
           <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_UsersTable_UserTypesTable" FromRole="UsersTable" ToRole="UserTypesTable" />
         </EntityType>
         <EntityType Name="UserTypesTable">
@@ -370,18 +334,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Constrain__Insti__6E01572D">
-          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
-          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InstitutionsTables">
-              <PropertyRef Name="InstitutionCode" />
-            </Principal>
-            <Dependent Role="ConstraintsTable">
-              <PropertyRef Name="InstitutionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ConstraintsTable_UserTypesTable">
           <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="1" />
           <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="*" />
@@ -403,18 +355,6 @@
             </Principal>
             <Dependent Role="InlayOptionsTable">
               <PropertyRef Name="OptionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsersTable_InstitutionsTables">
-          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InstitutionsTables">
-              <PropertyRef Name="InstitutionCode" />
-            </Principal>
-            <Dependent Role="UsersTable">
-              <PropertyRef Name="InstitutionCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -455,10 +395,6 @@
             <End Role="UsersTable" EntitySet="UsersTable" />
             <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
           </AssociationSet>
-          <AssociationSet Name="FK__Constrain__Insti__6E01572D" Association="Self.FK__Constrain__Insti__6E01572D">
-            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
-            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_ConstraintsTable_UserTypesTable" Association="Self.FK_ConstraintsTable_UserTypesTable">
             <End Role="UserTypesTable" EntitySet="UserTypesTable" />
             <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
@@ -466,10 +402,6 @@
           <AssociationSet Name="FK_InlayOptionsTable_ConstraintsTable1" Association="Self.FK_InlayOptionsTable_ConstraintsTable1">
             <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
             <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersTable_InstitutionsTables" Association="Self.FK_UsersTable_InstitutionsTables">
-            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
-            <End Role="UsersTable" EntitySet="UsersTable" />
           </AssociationSet>
           <AssociationSet Name="FK_UsersTable_UserTypesTable" Association="Self.FK_UsersTable_UserTypesTable">
             <End Role="UserTypesTable" EntitySet="UserTypesTable" />

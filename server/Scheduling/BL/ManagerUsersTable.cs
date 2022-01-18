@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.Model;
 using DAL;
 using DTO;
 
@@ -20,11 +21,23 @@ namespace BL
             return dtoList;
         }
 
-        public static UsersTable SingUp(DTOUsersTable user)
+        public static Object SignUp(DTOUsersTable user)
         {
             UsersTable u = user.FromDtoToTable();
             db.Execute<UsersTable>(u, DBConection.ExecuteActions.Insert);
             return u;
         }
+        public static Object  SignIn(UserDetails ud)
+        {
+
+            UsersTable u = db.GetDbSet<UsersTable>().FirstOrDefault(u1 => u1.UserName == ud.UserName);
+            if (u == null)
+                return new { success = false,  massage = "user does not exist" };
+            else if (!u.Password.Equals(ud.Password)) 
+                return new { success = false,  massage = "Password is wrong" };
+            else
+                return new{ success = true ,user = new DTOUsersTable(u),massage = "Login success"};
+        }
+
   }
 }

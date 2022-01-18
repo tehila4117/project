@@ -34,10 +34,14 @@ namespace DAL
         public virtual DbSet<UsersTable> UsersTable { get; set; }
         public virtual DbSet<UserTypesTable> UserTypesTable { get; set; }
 
+
         public DbSet<T> GetDbSet<T>() where T : class
         {
             return this.Set<T>();
         }
+
+
+
 
     }
 }

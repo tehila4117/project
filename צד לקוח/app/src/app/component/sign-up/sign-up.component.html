@@ -1,30 +1,27 @@
-<p>sign-up works!</p>
+ <p>sign-up works!</p>
 <form [formGroup]="signUpForm">
-    <!-- שם פרטי -->
+   שם פרטי
     <label for="fn">שם משתמש:</label>
-    <input formControlName="firstName" class="form-control" type="text" placeholder="ישראל" id="fn">
-    <ul *ngIf="signUpForm.controls['firstName'].errors!=null">
-        <li>ערך לא תקין</li>
-        <li *ngIf="signUpForm.controls['firstName'].errors.required!=null">שדה זה חובה</li>
-
-        <li *ngIf="signUpForm.controls['firstName'].errors.pattern!=null">אותיות גדולות וקטנות באנגלית בלבד</li>
-        <li *ngIf="signUpForm.controls['firstName'].errors.maxlength!=null">ארוך מידי</li>
-        <li *ngIf="signUpForm.controls['firstName'].errors.minlength!=null">קצר מידי</li>
-    </ul>
+    <input formControlName="userName" class="form-control" type="text" placeholder="ישראל" id="fn">
 
     <label for="mail">מייל</label>
-    <input class="form-control" type="email" id="mail">
+    <input formControlName="email" class="form-control" type="email" id="mail">
+
     <label for="un">סוג משתמש:</label>
-    <input class="form-control" type="text" placeholder="" id="un">
+    <input formControlName="UserType" class="form-control" type="text" placeholder="" id="un">
+
     <label for="pass">סיסמא:</label>
-    <input class="form-control" type="password" placeholder="" id="pass">
+    <input formControlName="password" class="form-control" type="password" placeholder="" id="pass">
+
     <label for="cpass">אימות סיסמא:</label>
-    <input class="form-control" type="password" placeholder="" id="cpass">
+    <input formControlName="password" class="form-control" type="password" placeholder="" id="cpass">
+
     <label for="pass">קוד מוסד:</label>
-    <input class="form-control" type="password" placeholder="" id="pass">
-    <input type="checkbox" id="agree">
-    <label for="agree">אני מאשר את תנאי השימוש באתר זה</label>
-    <input class="btn btn-primary" type="submit" value="הרשם">
+    <input formControlName="InstitutionCode" class="form-control" type="password" placeholder="" id="pass">
+
+    <!-- <input type="checkbox" id="agree">
+    <label for="agree">אני מאשר את תנאי השימוש באתר זה</label> -->
+    <input class="btn btn-primary" type="submit" value="הרשם"> -->
     <!-- שם משפחה -->
     <!-- מייל -->
   

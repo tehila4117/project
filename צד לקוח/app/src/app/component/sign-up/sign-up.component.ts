@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
+import { DbService } from 'src/app/server/db.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,9 +11,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SignUpComponent implements OnInit {
 
   signUpForm: any;
-  constructor() { }
+  constructor(private dbSevise:DbService) { }
 
   ngOnInit(): void {
+    
 
     this.signUpForm = new FormGroup(
       {
@@ -21,15 +24,26 @@ export class SignUpComponent implements OnInit {
         UserType: new FormControl(''),
         password: new FormControl(''),
         InstitutionCode: new FormControl(''),
-        confirmPassword: new FormControl(''),
-        agree: new FormControl(''),
+    
 
 
       }
     )
 
   }
-
+ doSignUp(){
+   console.log(this.signUpForm);
+   const user:User= {
+     userName:this.signUpForm.controls.userName.value,
+     UserType:this.signUpForm.controls.UserType.value,
+     password:this.signUpForm.controls.password.value
+     InstitutionCode:this.signUpForm.controls.InstitutionCode.value
+    }
+    console.log(user);
+    this.d
+   }
+   
+ }
 
   //   <!-- שם משפחה -->
   //   <!-- גיל  -->

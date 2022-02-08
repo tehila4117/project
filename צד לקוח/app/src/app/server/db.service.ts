@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -8,10 +10,14 @@ import { Injectable } from '@angular/core';
 export class DbService {
 
   constructor(private httpClient:HttpClient) { }
-  getUserDetails(user){
-    return this.httpClient.get<user>('http://localhost:53636/api/UsersTable/GetallUsers');
+
+
+  getUserDetails():Observable<User[]>{
+    return this.httpClient.get<User[]>('http://localhost:53636/api/UsersTable/GetallUsers');
   }
+
+
   getUserSignUp(){
-    
+
   }
 }

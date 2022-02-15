@@ -1,5 +1,5 @@
  <p>sign-up works!</p>
-<form [formGroup]="signUpForm">
+<form [formGroup]="signUpForm"  (submit)="doSignUp()"  >
    שם פרטי
     <label for="fn">שם משתמש:</label>
     <input formControlName="userName" class="form-control" type="text" placeholder="ישראל" id="fn">
@@ -13,8 +13,8 @@
     <label for="pass">סיסמא:</label>
     <input formControlName="password" class="form-control" type="password" placeholder="" id="pass">
 
-    <label for="cpass">אימות סיסמא:</label>
-    <input formControlName="password" class="form-control" type="password" placeholder="" id="cpass">
+    <!-- <label for="cpass">אימות סיסמא:</label>
+    <input formControlName="password" class="form-control" type="password" placeholder="" id="cpass"> -->
 
     <label for="pass">קוד מוסד:</label>
     <input formControlName="InstitutionCode" class="form-control" type="password" placeholder="" id="pass">

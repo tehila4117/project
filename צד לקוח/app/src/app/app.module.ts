@@ -9,6 +9,8 @@ import { UserComponent } from './component/user/user.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EnterComponent } from './component/enter/enter.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,15 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 
     SignInComponent,
      LoginComponent,
-     SignUpComponent
+     SignUpComponent,
+     EnterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

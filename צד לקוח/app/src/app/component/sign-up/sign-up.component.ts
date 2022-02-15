@@ -11,50 +11,45 @@ import { DbService } from 'src/app/server/db.service';
 export class SignUpComponent implements OnInit {
 
   signUpForm: any;
-  constructor(private dbSevise:DbService) { }
+  constructor(private dbServise: DbService) { }
 
   ngOnInit(): void {
-    
+
 
     this.signUpForm = new FormGroup(
       {
-        userName: new FormControl('', Validators.compose([Validators.required, Validators.pattern("^[0-9A-Za-zא-ת]*$"),, Validators.maxLength(8)])),
-       
+        userName: new FormControl('', Validators.compose([Validators.required, Validators.pattern("^[0-9A-Za-zא-ת]*$"), , Validators.maxLength(8)])),
         email: new FormControl(''),
         UserType: new FormControl(''),
         password: new FormControl(''),
         InstitutionCode: new FormControl(''),
-    
-
-
       }
     )
 
   }
- doSignUp(){
-   console.log(this.signUpForm);
-   const user:User= {
-     userName:this.signUpForm.controls.userName.value,
-     UserType:this.signUpForm.controls.UserType.value,
-     password:this.signUpForm.controls.password.value
-     InstitutionCode:this.signUpForm.controls.InstitutionCode.value
+  doSignUp() {
+
+    const user: User = {
+      UserName: this.signUpForm.controls.userName.value,
+      Password: this.signUpForm.controls.password.value,
+      Miles: this.signUpForm.controls.email.value,
+      UserType: parseInt( this.signUpForm.controls.UserType.value),
+      InstitutionCode: parseInt(this.signUpForm.controls.InstitutionCode.value)
     }
     console.log(user);
-    this.d
-   }
-   
- }
+ 
 
-  //   <!-- שם משפחה -->
-  //   <!-- גיל  -->
-  //   <!-- תאריך לידה -->
-  //   <!--טלפון -->
-  //   <!-- מייל -->
-  //   <!-- תז -->
 
-  //   <!-- שם משתמש לאתר -->
-  //   <!--סיסמא -->
-  //   <!--אימות סיסמא -->
-  //   <!-- אישור תנאי השימוש -->
-  // 
+
+    this.dbServise.doSignUp(user).subscribe(res =>{
+      console.log(res)
+      if(res==null)
+      alert("שגיאת שרת אין אפשרות להוסיף משתמשים חדשים נסה אחר")
+      else
+      alert("נרשמתה בהצלחה")
+    })
+  }
+
 }
+
+  

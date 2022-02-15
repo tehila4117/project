@@ -28,7 +28,7 @@ namespace API.Controllers
         {
             return BL.ManagerUsersTable.SignUp(user);
         }
-
+        [Route("api/UsersTable/PostSignIn")]
         public Object  PostSignIn([FromBody] UserDetails ud)
         {
             return BL.ManagerUsersTable.SignIn(ud);

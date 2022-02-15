@@ -17,7 +17,12 @@ export class DbService {
   }
 
 
-  getUserSignUp(){
+  doSignUp(user:User):Observable<User>{
+    return this.httpClient.post<User>('http://localhost:53636/api/UsersTable/PostSingUp',user)
+   
+  }
 
+  doSignIn(user:User):Observable<User>{
+    return this.httpClient.post<User>('http://localhost:53636/api/UsersTable/PostSingUp',user)
   }
 }

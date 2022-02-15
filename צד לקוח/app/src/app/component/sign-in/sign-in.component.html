@@ -1,9 +1,9 @@
-<h1>התחברות</h1>
-<h3>טופס התחברות</h3>
-<form>
-   <div>
-    <input type="text" value="הכנס שם משתמש">
-    <input type="text" value="הכנס סיסמא">
-    <button onclick="signIn()">התחברת👍👍</button>
- </div>
+<p>sign-up works!</p>
+<form [formGroup]="signInForm"  (submit)="doSignIn()"  >
+   שם פרטי
+   <label for="fn">שם משתמש:</label>
+   <input formControlName="userName" class="form-control" type="text" placeholder="ישראל" id="fn">
+   <label for="pass">סיסמא:</label>
+   <input formControlName="password" class="form-control" type="password" placeholder="" id="pass">
+   <input class="btn btn-primary" type="submit" value="התחבר"> 
 </form>

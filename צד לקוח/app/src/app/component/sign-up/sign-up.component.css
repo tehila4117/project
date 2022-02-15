@@ -5,3 +5,8 @@ input.ng-valid{
 input.ng-invalid{
     border-left: 15px double red;
 }
+
+
+label{
+    display:block;
+}

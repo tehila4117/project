@@ -4,15 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec51965c45874b09835d8d0f05d4bd59" Name="Diagram1">
-        <EntityTypeShape EntityType="ClassificationModel.ConstraintsForPlacementTable" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.ConstraintsTable" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InlayOptionsTable" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InlayTable" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InstitutionsTables" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.UsersTable" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.UserTypesTable" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+      <Diagram DiagramId="9bad635f4e7649bc904d4ed16b47bc9a" Name="Diagram1">
+        <EntityTypeShape EntityType="ClassificationModel.ClassTable" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.ConstraintsForPlacementTable" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.ConstraintsTable" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.InlayOptionsTable" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.InlayTable" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.InstitutionsTables" Width="1.5" PointX="1.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.UsersTable" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassificationModel.UserTypesTable" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="ClassificationModel.FK_ClassTable_InstitutionsTables" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassificationModel.FK_UsersTable_ClassTable" ManuallyRouted="false" />
         <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_InlayOptionsTable3" ManuallyRouted="false" />
         <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_InlayTable1" ManuallyRouted="false" />
         <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_UsersTable1" ManuallyRouted="false" />

@@ -9,15 +9,18 @@ namespace DTO
 {
     public class DTOUsersTable
     {
+       
+
         public long UserCode { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Miles { get; set; }
         public string UserType { get; set; }
         public long InstitutionCode { get; set; }
+        public long LayerClass { get; set; }
 
 
-        public DTOUsersTable()
+    public DTOUsersTable()
         {
 
         }
@@ -30,6 +33,7 @@ namespace DTO
             this.Miles = u.Miles;
             this.UserType = u.UserType;
             this.InstitutionCode = (long)u.InstitutionCode;
+            this.LayerClass = (long)u.LayerClass;
 
         }
 
@@ -42,6 +46,7 @@ namespace DTO
             Users.Miles =Miles;
             Users.UserType =UserType;
             Users.InstitutionCode = InstitutionCode;
+            Users.LayerClass = LayerClass;
             return Users;
 
         }

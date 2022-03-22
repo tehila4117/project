@@ -21,6 +21,14 @@ namespace BL
             return dtoList;
         }
 
+        public static List<DTOUsersTable> GetAllStudents()
+        {
+            string code = db.GetDbSet<UserTypesTable>().FirstOrDefault(type => type.UsernameType == "תלמיד").UserTypeCode;
+            List<UsersTable> list = db.GetDbSet<UsersTable>().Where(u=>u.UserType==code).ToList();
+            List<DTOUsersTable> dtoList = DTOUsersTable.CreatDtoList(list);
+            return dtoList;
+        }
+
         public static Object SignUp(DTOUsersTable user)
         {
             UsersTable u = user.FromDtoToTable();

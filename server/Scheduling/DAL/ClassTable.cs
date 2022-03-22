@@ -12,18 +12,20 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class InstitutionsTables
+    public partial class ClassTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InstitutionsTables()
+        public ClassTable()
         {
-            this.ClassTable = new HashSet<ClassTable>();
+            this.UsersTable = new HashSet<UsersTable>();
         }
     
-        public long InstitutionCode { get; set; }
-        public string InstitutionName { get; set; }
+        public long ClassId { get; set; }
+        public Nullable<long> InstitutionCode { get; set; }
+        public Nullable<long> LayerClass { get; set; }
     
+        public virtual InstitutionsTables InstitutionsTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassTable> ClassTable { get; set; }
+        public virtual ICollection<UsersTable> UsersTable { get; set; }
     }
 }

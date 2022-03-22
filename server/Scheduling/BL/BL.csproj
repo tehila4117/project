@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.cs" />
+    <Compile Include="Genetic.cs" />
     <Compile Include="ManagerConstraintsForPlacementTable.cs" />
     <Compile Include="ManagerConstraintsTable.cs" />
     <Compile Include="ManagerInlayOptionsTable.cs" />

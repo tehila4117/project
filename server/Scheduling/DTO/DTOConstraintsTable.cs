@@ -11,8 +11,8 @@ namespace DTO
     {
         public long ConstraintCode { get; set; }
         public string NameConstraint { get; set; }
-        public string UserType { get; set; }
-        public long InstitutionCode { get; set; }
+        public string UserCode { get; set; }
+       
         
         public DTOConstraintsTable()
         {
@@ -23,8 +23,8 @@ namespace DTO
         {
             this.ConstraintCode = C.ConstraintCode;
             this.NameConstraint = C.NameConstraint;
-            this.UserType =C.UserType;
-            this.InstitutionCode = (long)C.InstitutionCode;
+            this.UserCode = C.UserCode;
+           
         }
 
         public ConstraintsTable FromDtoToTable(DTOConstraintsTable C)
@@ -32,8 +32,8 @@ namespace DTO
             ConstraintsTable Constraint = new ConstraintsTable();
             Constraint.ConstraintCode =ConstraintCode;
             Constraint.NameConstraint =NameConstraint;
-            Constraint.UserType =UserType;
-            Constraint.InstitutionCode =InstitutionCode;
+            Constraint.UserCode = UserCode;
+ 
             return Constraint;
         }
 

@@ -22,8 +22,7 @@ namespace DAL
     
         public long ConstraintCode { get; set; }
         public string NameConstraint { get; set; }
-        public string UserType { get; set; }
-        public Nullable<long> InstitutionCode { get; set; }
+        public string UserCode { get; set; }
     
         public virtual UserTypesTable UserTypesTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -12,11 +12,13 @@ namespace BL
     class Genetic
     {
         List<DTOUsersTable> students = new List<DTOUsersTable>();
-        int level;
+        
 
         public Genetic()
         {
-            students = ManagerUsersTable.GetAllStudents().Where(l=>l.);
+            
+            students = ManagerUsersTable.GetAllStudents().ToList();
+            Dictionary< >
         }
         public void generate()
         {

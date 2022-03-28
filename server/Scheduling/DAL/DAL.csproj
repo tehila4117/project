@@ -51,9 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassificationEntities.cs" />
-    <Compile Include="ClassTable.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ConstraintsForPlacementTable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

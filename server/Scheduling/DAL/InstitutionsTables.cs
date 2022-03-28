@@ -14,16 +14,7 @@ namespace DAL
     
     public partial class InstitutionsTables
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InstitutionsTables()
-        {
-            this.ClassTable = new HashSet<ClassTable>();
-        }
-    
         public long InstitutionCode { get; set; }
         public string InstitutionName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassTable> ClassTable { get; set; }
     }
 }

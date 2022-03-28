@@ -5,14 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="ClassificationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ClassTable">
-          <Key>
-            <PropertyRef Name="ClassId" />
-          </Key>
-          <Property Name="ClassId" Type="bigint" Nullable="false" />
-          <Property Name="InstitutionCode" Type="bigint" />
-          <Property Name="LayerClass" Type="bigint" />
-        </EntityType>
         <EntityType Name="ConstraintsForPlacementTable">
           <Key>
             <PropertyRef Name="InputCodeForPlacement" />
@@ -29,8 +21,7 @@
           </Key>
           <Property Name="ConstraintCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameConstraint" Type="varchar" MaxLength="50" />
-          <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="InstitutionCode" Type="bigint" />
+          <Property Name="UserCode" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="InlayOptionsTable">
           <Key>
@@ -65,8 +56,6 @@
           <Property Name="Miles" Type="varchar" MaxLength="50" />
           <Property Name="UserType" Type="varchar" MaxLength="50" />
           <Property Name="InstitutionCode" Type="bigint" />
-          <Property Name="ClassId" Type="bigint" />
-          <Property Name="LayerClass" Type="bigint" />
         </EntityType>
         <EntityType Name="UserTypesTable">
           <Key>
@@ -75,18 +64,6 @@
           <Property Name="UserTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UsernameType" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_ClassTable_InstitutionsTables">
-          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
-          <End Role="ClassTable" Type="Self.ClassTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InstitutionsTables">
-              <PropertyRef Name="InstitutionCode" />
-            </Principal>
-            <Dependent Role="ClassTable">
-              <PropertyRef Name="InstitutionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3">
           <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="0..1" />
           <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
@@ -143,7 +120,7 @@
               <PropertyRef Name="UserTypeCode" />
             </Principal>
             <Dependent Role="ConstraintsTable">
-              <PropertyRef Name="UserType" />
+              <PropertyRef Name="UserCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -156,18 +133,6 @@
             </Principal>
             <Dependent Role="InlayOptionsTable">
               <PropertyRef Name="OptionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsersTable_ClassTable">
-          <End Role="ClassTable" Type="Self.ClassTable" Multiplicity="0..1" />
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassTable">
-              <PropertyRef Name="ClassId" />
-            </Principal>
-            <Dependent Role="UsersTable">
-              <PropertyRef Name="ClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -184,7 +149,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ClassificationModelStoreContainer">
-          <EntitySet Name="ClassTable" EntityType="Self.ClassTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstraintsForPlacementTable" EntityType="Self.ConstraintsForPlacementTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstraintsTable" EntityType="Self.ConstraintsTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InlayOptionsTable" EntityType="Self.InlayOptionsTable" Schema="dbo" store:Type="Tables" />
@@ -192,10 +156,6 @@
           <EntitySet Name="InstitutionsTables" EntityType="Self.InstitutionsTables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypesTable" EntityType="Self.UserTypesTable" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ClassTable_InstitutionsTables" Association="Self.FK_ClassTable_InstitutionsTables">
-            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
-            <End Role="ClassTable" EntitySet="ClassTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3" Association="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3">
             <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
             <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
@@ -220,10 +180,6 @@
             <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
             <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
           </AssociationSet>
-          <AssociationSet Name="FK_UsersTable_ClassTable" Association="Self.FK_UsersTable_ClassTable">
-            <End Role="ClassTable" EntitySet="ClassTable" />
-            <End Role="UsersTable" EntitySet="UsersTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_UsersTable_UserTypesTable" Association="Self.FK_UsersTable_UserTypesTable">
             <End Role="UserTypesTable" EntitySet="UserTypesTable" />
             <End Role="UsersTable" EntitySet="UsersTable" />
@@ -234,16 +190,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClassificationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ClassTable">
-          <Key>
-            <PropertyRef Name="ClassId" />
-          </Key>
-          <Property Name="ClassId" Type="Int64" Nullable="false" />
-          <Property Name="InstitutionCode" Type="Int64" />
-          <Property Name="LayerClass" Type="Int64" />
-          <NavigationProperty Name="InstitutionsTables" Relationship="Self.FK_ClassTable_InstitutionsTables" FromRole="ClassTable" ToRole="InstitutionsTables" />
-          <NavigationProperty Name="UsersTable" Relationship="Self.FK_UsersTable_ClassTable" FromRole="ClassTable" ToRole="UsersTable" />
-        </EntityType>
         <EntityType Name="ConstraintsForPlacementTable">
           <Key>
             <PropertyRef Name="InputCodeForPlacement" />
@@ -264,8 +210,7 @@
           </Key>
           <Property Name="ConstraintCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameConstraint" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="InstitutionCode" Type="Int64" />
+          <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_ConstraintsTable_UserTypesTable" FromRole="ConstraintsTable" ToRole="UserTypesTable" />
           <NavigationProperty Name="InlayOptionsTable" Relationship="Self.FK_InlayOptionsTable_ConstraintsTable1" FromRole="ConstraintsTable" ToRole="InlayOptionsTable" />
         </EntityType>
@@ -294,7 +239,6 @@
           </Key>
           <Property Name="InstitutionCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InstitutionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ClassTable" Relationship="Self.FK_ClassTable_InstitutionsTables" FromRole="InstitutionsTables" ToRole="ClassTable" />
         </EntityType>
         <EntityType Name="UsersTable">
           <Key>
@@ -306,9 +250,6 @@
           <Property Name="Miles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="InstitutionCode" Type="Int64" />
-          <Property Name="ClassId" Type="Int64" />
-          <Property Name="LayerClass" Type="Int64" />
-          <NavigationProperty Name="ClassTable" Relationship="Self.FK_UsersTable_ClassTable" FromRole="UsersTable" ToRole="ClassTable" />
           <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable1" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
           <NavigationProperty Name="ConstraintsForPlacementTable1" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable2" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
           <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_UsersTable_UserTypesTable" FromRole="UsersTable" ToRole="UserTypesTable" />
@@ -322,30 +263,6 @@
           <NavigationProperty Name="ConstraintsTable" Relationship="Self.FK_ConstraintsTable_UserTypesTable" FromRole="UserTypesTable" ToRole="ConstraintsTable" />
           <NavigationProperty Name="UsersTable" Relationship="Self.FK_UsersTable_UserTypesTable" FromRole="UserTypesTable" ToRole="UsersTable" />
         </EntityType>
-        <Association Name="FK_ClassTable_InstitutionsTables">
-          <End Role="InstitutionsTables" Type="Self.InstitutionsTables" Multiplicity="0..1" />
-          <End Role="ClassTable" Type="Self.ClassTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InstitutionsTables">
-              <PropertyRef Name="InstitutionCode" />
-            </Principal>
-            <Dependent Role="ClassTable">
-              <PropertyRef Name="InstitutionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsersTable_ClassTable">
-          <End Role="ClassTable" Type="Self.ClassTable" Multiplicity="0..1" />
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassTable">
-              <PropertyRef Name="ClassId" />
-            </Principal>
-            <Dependent Role="UsersTable">
-              <PropertyRef Name="ClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3">
           <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="0..1" />
           <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
@@ -402,7 +319,7 @@
               <PropertyRef Name="UserTypeCode" />
             </Principal>
             <Dependent Role="ConstraintsTable">
-              <PropertyRef Name="UserType" />
+              <PropertyRef Name="UserCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -430,8 +347,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClassificationEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ClassTable" EntityType="Self.ClassTable" />
+        <EntityContainer Name="ClassificationEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ConstraintsForPlacementTable" EntityType="Self.ConstraintsForPlacementTable" />
           <EntitySet Name="ConstraintsTable" EntityType="Self.ConstraintsTable" />
           <EntitySet Name="InlayOptionsTable" EntityType="Self.InlayOptionsTable" />
@@ -439,14 +355,6 @@
           <EntitySet Name="InstitutionsTables" EntityType="Self.InstitutionsTables" />
           <EntitySet Name="UsersTable" EntityType="Self.UsersTable" />
           <EntitySet Name="UserTypesTable" EntityType="Self.UserTypesTable" />
-          <AssociationSet Name="FK_ClassTable_InstitutionsTables" Association="Self.FK_ClassTable_InstitutionsTables">
-            <End Role="InstitutionsTables" EntitySet="InstitutionsTables" />
-            <End Role="ClassTable" EntitySet="ClassTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersTable_ClassTable" Association="Self.FK_UsersTable_ClassTable">
-            <End Role="ClassTable" EntitySet="ClassTable" />
-            <End Role="UsersTable" EntitySet="UsersTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3" Association="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3">
             <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
             <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
@@ -481,16 +389,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClassificationModelStoreContainer" CdmEntityContainer="ClassificationEntities1">
-          <EntitySetMapping Name="ClassTable">
-            <EntityTypeMapping TypeName="ClassificationModel.ClassTable">
-              <MappingFragment StoreEntitySet="ClassTable">
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
-                <ScalarProperty Name="LayerClass" ColumnName="LayerClass" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="ClassificationModelStoreContainer" CdmEntityContainer="ClassificationEntities4">
           <EntitySetMapping Name="ConstraintsForPlacementTable">
             <EntityTypeMapping TypeName="ClassificationModel.ConstraintsForPlacementTable">
               <MappingFragment StoreEntitySet="ConstraintsForPlacementTable">
@@ -507,8 +406,7 @@
               <MappingFragment StoreEntitySet="ConstraintsTable">
                 <ScalarProperty Name="ConstraintCode" ColumnName="ConstraintCode" />
                 <ScalarProperty Name="NameConstraint" ColumnName="NameConstraint" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -547,8 +445,6 @@
                 <ScalarProperty Name="Miles" ColumnName="Miles" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="LayerClass" ColumnName="LayerClass" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -27,10 +27,7 @@ namespace DAL
         public string Miles { get; set; }
         public string UserType { get; set; }
         public Nullable<long> InstitutionCode { get; set; }
-        public Nullable<long> ClassId { get; set; }
-        public Nullable<long> LayerClass { get; set; }
     
-        public virtual ClassTable ClassTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConstraintsForPlacementTable> ConstraintsForPlacementTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

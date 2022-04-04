@@ -1,6 +1,6 @@
- <p>sign-up works!</p>
+
 <form [formGroup]="signUpForm"  (submit)="doSignUp()"  >
-   שם פרטי
+  
     <label for="fn">שם משתמש:</label>
     <input formControlName="userName" class="form-control" type="text" placeholder="ישראל" id="fn">
 
@@ -8,7 +8,17 @@
     <input formControlName="email" class="form-control" type="email" id="mail">
 
     <label for="un">סוג משתמש:</label>
-    <input formControlName="UserType" class="form-control" type="text" placeholder="" id="un">
+    <!-- <input formControlName="UserType" class="form-control" type="text" placeholder="" id="un"> -->
+
+
+    <select class="form-select" aria-label="סוג משתמש">
+       
+        <option value="1">מנהל</option>
+        <option value="2">מורה</option>
+        <option value="3">תלמיד</option>
+      </select>
+
+
 
     <label for="pass">סיסמא:</label>
     <input formControlName="password" class="form-control" type="password" placeholder="" id="pass">
@@ -21,7 +31,7 @@
 
     <!-- <input type="checkbox" id="agree">
     <label for="agree">אני מאשר את תנאי השימוש באתר זה</label> -->
-    <input class="btn btn-primary" type="submit" value="הרשם"> -->
+    <button type="button" class="btn btn-dark">הרשם</button>
     <!-- שם משפחה -->
     <!-- מייל -->
   

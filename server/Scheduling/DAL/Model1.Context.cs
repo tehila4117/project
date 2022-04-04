@@ -13,9 +13,9 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ClassificationEntities4 : DbContext
+    public partial class ClassificationEntities : DbContext
     {
-        public ClassificationEntities4()
+        public ClassificationEntities()
             : base("name=ClassificationEntities4")
         {
         }

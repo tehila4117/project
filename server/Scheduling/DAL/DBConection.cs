@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 namespace DAL
 {
     public class DBConection
@@ -46,8 +47,6 @@ namespace DAL
                         break;
                 }
                 db.SaveChanges();
-
-
 
             }
         }

@@ -18,7 +18,7 @@ namespace BL
         {
             
             students = ManagerUsersTable.GetAllStudents().ToList();
-            Dictionary< >
+            
         }
         public void generate()
         {

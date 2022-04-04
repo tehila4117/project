@@ -6,11 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './component/user/user.component';
 
-import { LoginComponent } from './component/login/login.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EnterComponent } from './component/enter/enter.component';
+import { HomeComponent } from './component/home/home.component';
+import { NavComponent } from './component/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +19,10 @@ import { EnterComponent } from './component/enter/enter.component';
     UserComponent,
 
     SignInComponent,
-     LoginComponent,
      SignUpComponent,
-     EnterComponent
+     EnterComponent,
+     HomeComponent,
+     NavComponent
   ],
   imports: [
     BrowserModule,

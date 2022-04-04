@@ -32,9 +32,9 @@ namespace BL
          /// <returns>
          /// מחזירה רשימה של האילוצים בהתאם למוסד
          /// </returns>
-            public List<DTOConstraintsTable> GetConstraintByInstitutionCode(long institutionCode)
+            public List<DTOConstraintsTable> GetConstraintByUserCode(string userCode)
             {
-                return ManagerConstraintsTable.GetallConstraints().Where(a => a.InstitutionCode == institutionCode).ToList();
+                return ManagerConstraintsTable.GetallConstraints().Where(a => a.UserCode == userCode).ToList();
             }
          
 

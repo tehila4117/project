@@ -1,6 +1,6 @@
 
 <form [formGroup]="signUpForm"  (submit)="doSignUp()"  >
-  
+  <div class="container" style="align-items: center; width: 30rem;">
     <label for="fn">שם משתמש:</label>
     <input formControlName="userName" class="form-control" type="text" placeholder="ישראל" id="fn">
 
@@ -8,9 +8,7 @@
     <input formControlName="email" class="form-control" type="email" id="mail">
 
     <label for="un">סוג משתמש:</label>
-    <!-- <input formControlName="UserType" class="form-control" type="text" placeholder="" id="un"> -->
-
-
+   
     <select class="form-select" aria-label="סוג משתמש">
        
         <option value="1">מנהל</option>
@@ -18,26 +16,13 @@
         <option value="3">תלמיד</option>
       </select>
 
-
-
     <label for="pass">סיסמא:</label>
     <input formControlName="password" class="form-control" type="password" placeholder="" id="pass">
-
-    <!-- <label for="cpass">אימות סיסמא:</label>
-    <input formControlName="password" class="form-control" type="password" placeholder="" id="cpass"> -->
 
     <label for="pass">קוד מוסד:</label>
     <input formControlName="InstitutionCode" class="form-control" type="password" placeholder="" id="pass">
 
-    <!-- <input type="checkbox" id="agree">
-    <label for="agree">אני מאשר את תנאי השימוש באתר זה</label> -->
-    <button type="button" class="btn btn-dark">הרשם</button>
-    <!-- שם משפחה -->
-    <!-- מייל -->
-  
 
-    <!-- שם משתמש לאתר -->
-    <!--סיסמא -->
-    <!--אימות סיסמא -->
-    <!-- אישור תנאי השימוש -->
+    <button type="button" class="btn btn-dark">הרשם</button>
+   </div>
 </form>

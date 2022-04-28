@@ -12,20 +12,20 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ConstraintsTable
+    public partial class AreasInCity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ConstraintsTable()
+        public AreasInCity()
         {
-            this.InlayOptionsTable = new HashSet<InlayOptionsTable>();
+            this.Students = new HashSet<Students>();
         }
     
-        public long ConstraintCode { get; set; }
-        public string NameConstraint { get; set; }
-        public string UserCode { get; set; }
+        public long AreaCityCode { get; set; }
+        public string NameAreaCity { get; set; }
+        public Nullable<long> CityCode { get; set; }
     
-        public virtual UserTypesTable UserTypesTable { get; set; }
+        public virtual Cities Cities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InlayOptionsTable> InlayOptionsTable { get; set; }
+        public virtual ICollection<Students> Students { get; set; }
     }
 }

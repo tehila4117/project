@@ -4,21 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="85bbba32f15c45728179d407a94f9779" Name="Diagram1">
-        <EntityTypeShape EntityType="ClassificationModel.ConstraintsForPlacementTable" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.ConstraintsTable" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InlayOptionsTable" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InlayTable" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.InstitutionsTables" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.UsersTable" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClassificationModel.UserTypesTable" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_InlayOptionsTable3" ManuallyRouted="false" />
-        <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_InlayTable1" ManuallyRouted="false" />
-        <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_UsersTable1" ManuallyRouted="false" />
-        <AssociationConnector Association="ClassificationModel.FK_ConstraintsForPlacementTable_UsersTable2" ManuallyRouted="false" />
-        <AssociationConnector Association="ClassificationModel.FK_ConstraintsTable_UserTypesTable" ManuallyRouted="false" />
-        <AssociationConnector Association="ClassificationModel.FK_InlayOptionsTable_ConstraintsTable1" ManuallyRouted="false" />
-        <AssociationConnector Association="ClassificationModel.FK_UsersTable_UserTypesTable" ManuallyRouted="false" />
+      <Diagram DiagramId="63550f3c35f0436fa5e4c15dd76d9ffd" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentPlacementModel.AreasInCity" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPlacementModel.Cities" Width="1.5" PointX="1.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPlacementModel.EducationalInstitutions" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPlacementModel.Inlays" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPlacementModel.InlaySlot" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPlacementModel.School" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPlacementModel.Students" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="StudentPlacementModel.FK_AreasInCity_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPlacementModel.FK_Students_AreasInCity" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPlacementModel.FK_Students_EducationalInstitutions" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPlacementModel.FK_Inlays_School" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPlacementModel.FK_InlaySlot_Inlays" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPlacementModel.FK_Students_School" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

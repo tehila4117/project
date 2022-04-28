@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ClassificationEntities : DbContext
+    public partial class StudentPlacementEntities : DbContext
     {
-        public ClassificationEntities()
-            : base("name=ClassificationEntities4")
+        public StudentPlacementEntities()
+            : base("name=StudentPlacementEntities")
         {
         }
     
@@ -25,20 +25,21 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ConstraintsForPlacementTable> ConstraintsForPlacementTable { get; set; }
-        public virtual DbSet<ConstraintsTable> ConstraintsTable { get; set; }
-        public virtual DbSet<InlayOptionsTable> InlayOptionsTable { get; set; }
-        public virtual DbSet<InlayTable> InlayTable { get; set; }
-        public virtual DbSet<InstitutionsTables> InstitutionsTables { get; set; }
-        public virtual DbSet<UsersTable> UsersTable { get; set; }
-        public virtual DbSet<UserTypesTable> UserTypesTable { get; set; }
-
+        public virtual DbSet<AreasInCity> AreasInCity { get; set; }
+        public virtual DbSet<Cities> Cities { get; set; }
+        public virtual DbSet<EducationalInstitutions> EducationalInstitutions { get; set; }
+        public virtual DbSet<Inlays> Inlays { get; set; }
+        public virtual DbSet<InlaySlot> InlaySlot { get; set; }
+        public virtual DbSet<School> School { get; set; }
+        public virtual DbSet<Students> Students { get; set; }
 
 
         public DbSet<T> GetDbSet<T>() where T : class
         {
             return this.Set<T>();
         }
-
     }
+
+  
+
 }

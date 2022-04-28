@@ -4,384 +4,354 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClassificationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ConstraintsForPlacementTable">
+      <Schema Namespace="StudentPlacementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AreasInCity">
           <Key>
-            <PropertyRef Name="InputCodeForPlacement" />
+            <PropertyRef Name="AreaCityCode" />
           </Key>
-          <Property Name="InputCodeForPlacement" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InlayCode" Type="bigint" />
-          <Property Name="AuthorCodeForInlay" Type="bigint" />
-          <Property Name="ForcedOptionCode" Type="bigint" />
-          <Property Name="ForWhomTheInlay" Type="bigint" />
+          <Property Name="AreaCityCode" Type="bigint" Nullable="false" />
+          <Property Name="NameAreaCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="CityCode" Type="bigint" />
         </EntityType>
-        <EntityType Name="ConstraintsTable">
+        <EntityType Name="Cities">
           <Key>
-            <PropertyRef Name="ConstraintCode" />
+            <PropertyRef Name="CityCode" />
           </Key>
-          <Property Name="ConstraintCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NameConstraint" Type="varchar" MaxLength="50" />
-          <Property Name="UserCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CityCode" Type="bigint" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="InlayOptionsTable">
+        <EntityType Name="EducationalInstitutions">
           <Key>
-            <PropertyRef Name="ForcedOptionCode" />
+            <PropertyRef Name="EducationalInstitutionCode" />
           </Key>
-          <Property Name="ForcedOptionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="option" Type="varchar" MaxLength="50" />
-          <Property Name="OptionCode" Type="bigint" />
+          <Property Name="EducationalInstitutionCode" Type="bigint" Nullable="false" />
+          <Property Name="InstitutionName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="InlayTable">
+        <EntityType Name="Inlays">
           <Key>
             <PropertyRef Name="InlayCode" />
           </Key>
-          <Property Name="InlayCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InlayName" Type="varchar" MaxLength="50" />
-          <Property Name="PlacementDate" Type="date" Nullable="false" />
+          <Property Name="InlayCode" Type="bigint" Nullable="false" />
+          <Property Name="InlayName" Type="nvarchar" MaxLength="50" />
+          <Property Name="InlayDate" Type="date" />
+          <Property Name="InstitutionCode" Type="bigint" />
         </EntityType>
-        <EntityType Name="InstitutionsTables">
+        <EntityType Name="InlaySlot">
+          <Key>
+            <PropertyRef Name="SlotCode" />
+          </Key>
+          <Property Name="SlotCode" Type="bigint" Nullable="false" />
+          <Property Name="InlayCode" Type="bigint" />
+          <Property Name="StudentCode" Type="bigint" />
+          <Property Name="NumOfClass" Type="int" />
+        </EntityType>
+        <EntityType Name="School">
           <Key>
             <PropertyRef Name="InstitutionCode" />
           </Key>
-          <Property Name="InstitutionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InstitutionName" Type="varchar" MaxLength="50" />
+          <Property Name="InstitutionCode" Type="bigint" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="int" />
+          <Property Name="NumberOfChildrenInClass" Type="int" />
         </EntityType>
-        <EntityType Name="UsersTable">
+        <EntityType Name="Students">
           <Key>
-            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="StudentCode" />
           </Key>
-          <Property Name="UserCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
-          <Property Name="Miles" Type="varchar" MaxLength="50" />
-          <Property Name="UserType" Type="varchar" MaxLength="50" />
+          <Property Name="StudentCode" Type="bigint" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreaCityCode" Type="bigint" />
+          <Property Name="GradePointAverage" Type="float" />
+          <Property Name="SocialInvolvement" Type="int" />
+          <Property Name="PreviousSchoolCode" Type="bigint" />
           <Property Name="InstitutionCode" Type="bigint" />
         </EntityType>
-        <EntityType Name="UserTypesTable">
-          <Key>
-            <PropertyRef Name="UserTypeCode" />
-          </Key>
-          <Property Name="UserTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="UsernameType" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <Association Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3">
-          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+        <Association Name="FK_AreasInCity_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="AreasInCity" Type="Self.AreasInCity" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="InlayOptionsTable">
-              <PropertyRef Name="ForcedOptionCode" />
+            <Principal Role="Cities">
+              <PropertyRef Name="CityCode" />
             </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="ForcedOptionCode" />
+            <Dependent Role="AreasInCity">
+              <PropertyRef Name="CityCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstraintsForPlacementTable_InlayTable1">
-          <End Role="InlayTable" Type="Self.InlayTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+        <Association Name="FK_Inlays_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Inlays" Type="Self.Inlays" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="InlayTable">
+            <Principal Role="School">
+              <PropertyRef Name="InstitutionCode" />
+            </Principal>
+            <Dependent Role="Inlays">
+              <PropertyRef Name="InstitutionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InlaySlot_Inlays">
+          <End Role="Inlays" Type="Self.Inlays" Multiplicity="0..1" />
+          <End Role="InlaySlot" Type="Self.InlaySlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inlays">
               <PropertyRef Name="InlayCode" />
             </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="AuthorCodeForInlay" />
+            <Dependent Role="InlaySlot">
+              <PropertyRef Name="InlayCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstraintsForPlacementTable_UsersTable1">
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+        <Association Name="FK_Students_AreasInCity">
+          <End Role="AreasInCity" Type="Self.AreasInCity" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UsersTable">
-              <PropertyRef Name="UserCode" />
+            <Principal Role="AreasInCity">
+              <PropertyRef Name="AreaCityCode" />
             </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="ForWhomTheInlay" />
+            <Dependent Role="Students">
+              <PropertyRef Name="AreaCityCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstraintsForPlacementTable_UsersTable2">
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+        <Association Name="FK_Students_EducationalInstitutions">
+          <End Role="EducationalInstitutions" Type="Self.EducationalInstitutions" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UsersTable">
-              <PropertyRef Name="UserCode" />
+            <Principal Role="EducationalInstitutions">
+              <PropertyRef Name="EducationalInstitutionCode" />
             </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="AuthorCodeForInlay" />
+            <Dependent Role="Students">
+              <PropertyRef Name="PreviousSchoolCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstraintsTable_UserTypesTable">
-          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="1" />
-          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="*" />
+        <Association Name="FK_Students_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserTypesTable">
-              <PropertyRef Name="UserTypeCode" />
+            <Principal Role="School">
+              <PropertyRef Name="InstitutionCode" />
             </Principal>
-            <Dependent Role="ConstraintsTable">
-              <PropertyRef Name="UserCode" />
+            <Dependent Role="Students">
+              <PropertyRef Name="InstitutionCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InlayOptionsTable_ConstraintsTable1">
-          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="0..1" />
-          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConstraintsTable">
-              <PropertyRef Name="ConstraintCode" />
-            </Principal>
-            <Dependent Role="InlayOptionsTable">
-              <PropertyRef Name="OptionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsersTable_UserTypesTable">
-          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="0..1" />
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserTypesTable">
-              <PropertyRef Name="UserTypeCode" />
-            </Principal>
-            <Dependent Role="UsersTable">
-              <PropertyRef Name="UserType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ClassificationModelStoreContainer">
-          <EntitySet Name="ConstraintsForPlacementTable" EntityType="Self.ConstraintsForPlacementTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ConstraintsTable" EntityType="Self.ConstraintsTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InlayOptionsTable" EntityType="Self.InlayOptionsTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InlayTable" EntityType="Self.InlayTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InstitutionsTables" EntityType="Self.InstitutionsTables" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserTypesTable" EntityType="Self.UserTypesTable" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3" Association="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3">
-            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+        <EntityContainer Name="StudentPlacementModelStoreContainer">
+          <EntitySet Name="AreasInCity" EntityType="Self.AreasInCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducationalInstitutions" EntityType="Self.EducationalInstitutions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inlays" EntityType="Self.Inlays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InlaySlot" EntityType="Self.InlaySlot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AreasInCity_Cities" Association="Self.FK_AreasInCity_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="AreasInCity" EntitySet="AreasInCity" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayTable1" Association="Self.FK_ConstraintsForPlacementTable_InlayTable1">
-            <End Role="InlayTable" EntitySet="InlayTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          <AssociationSet Name="FK_Inlays_School" Association="Self.FK_Inlays_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Inlays" EntitySet="Inlays" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable1" Association="Self.FK_ConstraintsForPlacementTable_UsersTable1">
-            <End Role="UsersTable" EntitySet="UsersTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          <AssociationSet Name="FK_InlaySlot_Inlays" Association="Self.FK_InlaySlot_Inlays">
+            <End Role="Inlays" EntitySet="Inlays" />
+            <End Role="InlaySlot" EntitySet="InlaySlot" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable2" Association="Self.FK_ConstraintsForPlacementTable_UsersTable2">
-            <End Role="UsersTable" EntitySet="UsersTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          <AssociationSet Name="FK_Students_AreasInCity" Association="Self.FK_Students_AreasInCity">
+            <End Role="AreasInCity" EntitySet="AreasInCity" />
+            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsTable_UserTypesTable" Association="Self.FK_ConstraintsTable_UserTypesTable">
-            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
-            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
+          <AssociationSet Name="FK_Students_EducationalInstitutions" Association="Self.FK_Students_EducationalInstitutions">
+            <End Role="EducationalInstitutions" EntitySet="EducationalInstitutions" />
+            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_InlayOptionsTable_ConstraintsTable1" Association="Self.FK_InlayOptionsTable_ConstraintsTable1">
-            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
-            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersTable_UserTypesTable" Association="Self.FK_UsersTable_UserTypesTable">
-            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
-            <End Role="UsersTable" EntitySet="UsersTable" />
+          <AssociationSet Name="FK_Students_School" Association="Self.FK_Students_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ClassificationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ConstraintsForPlacementTable">
+      <Schema Namespace="StudentPlacementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AreasInCity">
           <Key>
-            <PropertyRef Name="InputCodeForPlacement" />
+            <PropertyRef Name="AreaCityCode" />
           </Key>
-          <Property Name="InputCodeForPlacement" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InlayCode" Type="Int64" />
-          <Property Name="AuthorCodeForInlay" Type="Int64" />
-          <Property Name="ForcedOptionCode" Type="Int64" />
-          <Property Name="ForWhomTheInlay" Type="Int64" />
-          <NavigationProperty Name="InlayOptionsTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3" FromRole="ConstraintsForPlacementTable" ToRole="InlayOptionsTable" />
-          <NavigationProperty Name="InlayTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayTable1" FromRole="ConstraintsForPlacementTable" ToRole="InlayTable" />
-          <NavigationProperty Name="UsersTable" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable1" FromRole="ConstraintsForPlacementTable" ToRole="UsersTable" />
-          <NavigationProperty Name="UsersTable1" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable2" FromRole="ConstraintsForPlacementTable" ToRole="UsersTable" />
+          <Property Name="AreaCityCode" Type="Int64" Nullable="false" />
+          <Property Name="NameAreaCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityCode" Type="Int64" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_AreasInCity_Cities" FromRole="AreasInCity" ToRole="Cities" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_AreasInCity" FromRole="AreasInCity" ToRole="Students" />
         </EntityType>
-        <EntityType Name="ConstraintsTable">
+        <EntityType Name="Cities">
           <Key>
-            <PropertyRef Name="ConstraintCode" />
+            <PropertyRef Name="CityCode" />
           </Key>
-          <Property Name="ConstraintCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameConstraint" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_ConstraintsTable_UserTypesTable" FromRole="ConstraintsTable" ToRole="UserTypesTable" />
-          <NavigationProperty Name="InlayOptionsTable" Relationship="Self.FK_InlayOptionsTable_ConstraintsTable1" FromRole="ConstraintsTable" ToRole="InlayOptionsTable" />
+          <Property Name="CityCode" Type="Int64" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AreasInCity" Relationship="Self.FK_AreasInCity_Cities" FromRole="Cities" ToRole="AreasInCity" />
         </EntityType>
-        <EntityType Name="InlayOptionsTable">
+        <EntityType Name="EducationalInstitutions">
           <Key>
-            <PropertyRef Name="ForcedOptionCode" />
+            <PropertyRef Name="EducationalInstitutionCode" />
           </Key>
-          <Property Name="ForcedOptionCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="option" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OptionCode" Type="Int64" />
-          <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3" FromRole="InlayOptionsTable" ToRole="ConstraintsForPlacementTable" />
-          <NavigationProperty Name="ConstraintsTable" Relationship="Self.FK_InlayOptionsTable_ConstraintsTable1" FromRole="InlayOptionsTable" ToRole="ConstraintsTable" />
+          <Property Name="EducationalInstitutionCode" Type="Int64" Nullable="false" />
+          <Property Name="InstitutionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_EducationalInstitutions" FromRole="EducationalInstitutions" ToRole="Students" />
         </EntityType>
-        <EntityType Name="InlayTable">
+        <EntityType Name="Inlays">
           <Key>
             <PropertyRef Name="InlayCode" />
           </Key>
-          <Property Name="InlayCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InlayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PlacementDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_InlayTable1" FromRole="InlayTable" ToRole="ConstraintsForPlacementTable" />
+          <Property Name="InlayCode" Type="Int64" Nullable="false" />
+          <Property Name="InlayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InlayDate" Type="DateTime" Precision="0" />
+          <Property Name="InstitutionCode" Type="Int64" />
+          <NavigationProperty Name="School" Relationship="Self.FK_Inlays_School" FromRole="Inlays" ToRole="School" />
+          <NavigationProperty Name="InlaySlot" Relationship="Self.FK_InlaySlot_Inlays" FromRole="Inlays" ToRole="InlaySlot" />
         </EntityType>
-        <EntityType Name="InstitutionsTables">
+        <EntityType Name="InlaySlot">
+          <Key>
+            <PropertyRef Name="SlotCode" />
+          </Key>
+          <Property Name="SlotCode" Type="Int64" Nullable="false" />
+          <Property Name="InlayCode" Type="Int64" />
+          <Property Name="StudentCode" Type="Int64" />
+          <Property Name="NumOfClass" Type="Int32" />
+          <NavigationProperty Name="Inlays" Relationship="Self.FK_InlaySlot_Inlays" FromRole="InlaySlot" ToRole="Inlays" />
+        </EntityType>
+        <EntityType Name="School">
           <Key>
             <PropertyRef Name="InstitutionCode" />
           </Key>
-          <Property Name="InstitutionCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InstitutionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InstitutionCode" Type="Int64" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="Int32" />
+          <Property Name="NumberOfChildrenInClass" Type="Int32" />
+          <NavigationProperty Name="Inlays" Relationship="Self.FK_Inlays_School" FromRole="School" ToRole="Inlays" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_School" FromRole="School" ToRole="Students" />
         </EntityType>
-        <EntityType Name="UsersTable">
+        <EntityType Name="Students">
           <Key>
-            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="StudentCode" />
           </Key>
-          <Property Name="UserCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Miles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudentCode" Type="Int64" Nullable="false" />
+          <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AreaCityCode" Type="Int64" />
+          <Property Name="GradePointAverage" Type="Double" />
+          <Property Name="SocialInvolvement" Type="Int32" />
+          <Property Name="PreviousSchoolCode" Type="Int64" />
           <Property Name="InstitutionCode" Type="Int64" />
-          <NavigationProperty Name="ConstraintsForPlacementTable" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable1" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
-          <NavigationProperty Name="ConstraintsForPlacementTable1" Relationship="Self.FK_ConstraintsForPlacementTable_UsersTable2" FromRole="UsersTable" ToRole="ConstraintsForPlacementTable" />
-          <NavigationProperty Name="UserTypesTable" Relationship="Self.FK_UsersTable_UserTypesTable" FromRole="UsersTable" ToRole="UserTypesTable" />
+          <NavigationProperty Name="AreasInCity" Relationship="Self.FK_Students_AreasInCity" FromRole="Students" ToRole="AreasInCity" />
+          <NavigationProperty Name="EducationalInstitutions" Relationship="Self.FK_Students_EducationalInstitutions" FromRole="Students" ToRole="EducationalInstitutions" />
+          <NavigationProperty Name="School" Relationship="Self.FK_Students_School" FromRole="Students" ToRole="School" />
         </EntityType>
-        <EntityType Name="UserTypesTable">
-          <Key>
-            <PropertyRef Name="UserTypeCode" />
-          </Key>
-          <Property Name="UserTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UsernameType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ConstraintsTable" Relationship="Self.FK_ConstraintsTable_UserTypesTable" FromRole="UserTypesTable" ToRole="ConstraintsTable" />
-          <NavigationProperty Name="UsersTable" Relationship="Self.FK_UsersTable_UserTypesTable" FromRole="UserTypesTable" ToRole="UsersTable" />
-        </EntityType>
-        <Association Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3">
-          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+        <Association Name="FK_AreasInCity_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="AreasInCity" Type="Self.AreasInCity" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="InlayOptionsTable">
-              <PropertyRef Name="ForcedOptionCode" />
+            <Principal Role="Cities">
+              <PropertyRef Name="CityCode" />
             </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="ForcedOptionCode" />
+            <Dependent Role="AreasInCity">
+              <PropertyRef Name="CityCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstraintsForPlacementTable_InlayTable1">
-          <End Role="InlayTable" Type="Self.InlayTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+        <Association Name="FK_Students_AreasInCity">
+          <End Role="AreasInCity" Type="Self.AreasInCity" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="InlayTable">
+            <Principal Role="AreasInCity">
+              <PropertyRef Name="AreaCityCode" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="AreaCityCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_EducationalInstitutions">
+          <End Role="EducationalInstitutions" Type="Self.EducationalInstitutions" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationalInstitutions">
+              <PropertyRef Name="EducationalInstitutionCode" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="PreviousSchoolCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inlays_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Inlays" Type="Self.Inlays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="InstitutionCode" />
+            </Principal>
+            <Dependent Role="Inlays">
+              <PropertyRef Name="InstitutionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InlaySlot_Inlays">
+          <End Role="Inlays" Type="Self.Inlays" Multiplicity="0..1" />
+          <End Role="InlaySlot" Type="Self.InlaySlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inlays">
               <PropertyRef Name="InlayCode" />
             </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="AuthorCodeForInlay" />
+            <Dependent Role="InlaySlot">
+              <PropertyRef Name="InlayCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstraintsForPlacementTable_UsersTable1">
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
+        <Association Name="FK_Students_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UsersTable">
-              <PropertyRef Name="UserCode" />
+            <Principal Role="School">
+              <PropertyRef Name="InstitutionCode" />
             </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="ForWhomTheInlay" />
+            <Dependent Role="Students">
+              <PropertyRef Name="InstitutionCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstraintsForPlacementTable_UsersTable2">
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
-          <End Role="ConstraintsForPlacementTable" Type="Self.ConstraintsForPlacementTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UsersTable">
-              <PropertyRef Name="UserCode" />
-            </Principal>
-            <Dependent Role="ConstraintsForPlacementTable">
-              <PropertyRef Name="AuthorCodeForInlay" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConstraintsTable_UserTypesTable">
-          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="1" />
-          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserTypesTable">
-              <PropertyRef Name="UserTypeCode" />
-            </Principal>
-            <Dependent Role="ConstraintsTable">
-              <PropertyRef Name="UserCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InlayOptionsTable_ConstraintsTable1">
-          <End Role="ConstraintsTable" Type="Self.ConstraintsTable" Multiplicity="0..1" />
-          <End Role="InlayOptionsTable" Type="Self.InlayOptionsTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConstraintsTable">
-              <PropertyRef Name="ConstraintCode" />
-            </Principal>
-            <Dependent Role="InlayOptionsTable">
-              <PropertyRef Name="OptionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsersTable_UserTypesTable">
-          <End Role="UserTypesTable" Type="Self.UserTypesTable" Multiplicity="0..1" />
-          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserTypesTable">
-              <PropertyRef Name="UserTypeCode" />
-            </Principal>
-            <Dependent Role="UsersTable">
-              <PropertyRef Name="UserType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ClassificationEntities4" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ConstraintsForPlacementTable" EntityType="Self.ConstraintsForPlacementTable" />
-          <EntitySet Name="ConstraintsTable" EntityType="Self.ConstraintsTable" />
-          <EntitySet Name="InlayOptionsTable" EntityType="Self.InlayOptionsTable" />
-          <EntitySet Name="InlayTable" EntityType="Self.InlayTable" />
-          <EntitySet Name="InstitutionsTables" EntityType="Self.InstitutionsTables" />
-          <EntitySet Name="UsersTable" EntityType="Self.UsersTable" />
-          <EntitySet Name="UserTypesTable" EntityType="Self.UserTypesTable" />
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayOptionsTable3" Association="Self.FK_ConstraintsForPlacementTable_InlayOptionsTable3">
-            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+        <EntityContainer Name="StudentPlacementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AreasInCity" EntityType="Self.AreasInCity" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="EducationalInstitutions" EntityType="Self.EducationalInstitutions" />
+          <EntitySet Name="Inlays" EntityType="Self.Inlays" />
+          <EntitySet Name="InlaySlot" EntityType="Self.InlaySlot" />
+          <EntitySet Name="School" EntityType="Self.School" />
+          <EntitySet Name="Students" EntityType="Self.Students" />
+          <AssociationSet Name="FK_AreasInCity_Cities" Association="Self.FK_AreasInCity_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="AreasInCity" EntitySet="AreasInCity" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_InlayTable1" Association="Self.FK_ConstraintsForPlacementTable_InlayTable1">
-            <End Role="InlayTable" EntitySet="InlayTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          <AssociationSet Name="FK_Students_AreasInCity" Association="Self.FK_Students_AreasInCity">
+            <End Role="AreasInCity" EntitySet="AreasInCity" />
+            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable1" Association="Self.FK_ConstraintsForPlacementTable_UsersTable1">
-            <End Role="UsersTable" EntitySet="UsersTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          <AssociationSet Name="FK_Students_EducationalInstitutions" Association="Self.FK_Students_EducationalInstitutions">
+            <End Role="EducationalInstitutions" EntitySet="EducationalInstitutions" />
+            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsForPlacementTable_UsersTable2" Association="Self.FK_ConstraintsForPlacementTable_UsersTable2">
-            <End Role="UsersTable" EntitySet="UsersTable" />
-            <End Role="ConstraintsForPlacementTable" EntitySet="ConstraintsForPlacementTable" />
+          <AssociationSet Name="FK_Inlays_School" Association="Self.FK_Inlays_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Inlays" EntitySet="Inlays" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstraintsTable_UserTypesTable" Association="Self.FK_ConstraintsTable_UserTypesTable">
-            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
-            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
+          <AssociationSet Name="FK_InlaySlot_Inlays" Association="Self.FK_InlaySlot_Inlays">
+            <End Role="Inlays" EntitySet="Inlays" />
+            <End Role="InlaySlot" EntitySet="InlaySlot" />
           </AssociationSet>
-          <AssociationSet Name="FK_InlayOptionsTable_ConstraintsTable1" Association="Self.FK_InlayOptionsTable_ConstraintsTable1">
-            <End Role="ConstraintsTable" EntitySet="ConstraintsTable" />
-            <End Role="InlayOptionsTable" EntitySet="InlayOptionsTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersTable_UserTypesTable" Association="Self.FK_UsersTable_UserTypesTable">
-            <End Role="UserTypesTable" EntitySet="UserTypesTable" />
-            <End Role="UsersTable" EntitySet="UsersTable" />
+          <AssociationSet Name="FK_Students_School" Association="Self.FK_Students_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -389,70 +359,72 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClassificationModelStoreContainer" CdmEntityContainer="ClassificationEntities4">
-          <EntitySetMapping Name="ConstraintsForPlacementTable">
-            <EntityTypeMapping TypeName="ClassificationModel.ConstraintsForPlacementTable">
-              <MappingFragment StoreEntitySet="ConstraintsForPlacementTable">
-                <ScalarProperty Name="InputCodeForPlacement" ColumnName="InputCodeForPlacement" />
-                <ScalarProperty Name="InlayCode" ColumnName="InlayCode" />
-                <ScalarProperty Name="AuthorCodeForInlay" ColumnName="AuthorCodeForInlay" />
-                <ScalarProperty Name="ForcedOptionCode" ColumnName="ForcedOptionCode" />
-                <ScalarProperty Name="ForWhomTheInlay" ColumnName="ForWhomTheInlay" />
+        <EntityContainerMapping StorageEntityContainer="StudentPlacementModelStoreContainer" CdmEntityContainer="StudentPlacementEntities">
+          <EntitySetMapping Name="AreasInCity">
+            <EntityTypeMapping TypeName="StudentPlacementModel.AreasInCity">
+              <MappingFragment StoreEntitySet="AreasInCity">
+                <ScalarProperty Name="AreaCityCode" ColumnName="AreaCityCode" />
+                <ScalarProperty Name="NameAreaCity" ColumnName="NameAreaCity" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ConstraintsTable">
-            <EntityTypeMapping TypeName="ClassificationModel.ConstraintsTable">
-              <MappingFragment StoreEntitySet="ConstraintsTable">
-                <ScalarProperty Name="ConstraintCode" ColumnName="ConstraintCode" />
-                <ScalarProperty Name="NameConstraint" ColumnName="NameConstraint" />
-                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="StudentPlacementModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="InlayOptionsTable">
-            <EntityTypeMapping TypeName="ClassificationModel.InlayOptionsTable">
-              <MappingFragment StoreEntitySet="InlayOptionsTable">
-                <ScalarProperty Name="ForcedOptionCode" ColumnName="ForcedOptionCode" />
-                <ScalarProperty Name="option" ColumnName="option" />
-                <ScalarProperty Name="OptionCode" ColumnName="OptionCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InlayTable">
-            <EntityTypeMapping TypeName="ClassificationModel.InlayTable">
-              <MappingFragment StoreEntitySet="InlayTable">
-                <ScalarProperty Name="InlayCode" ColumnName="InlayCode" />
-                <ScalarProperty Name="InlayName" ColumnName="InlayName" />
-                <ScalarProperty Name="PlacementDate" ColumnName="PlacementDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InstitutionsTables">
-            <EntityTypeMapping TypeName="ClassificationModel.InstitutionsTables">
-              <MappingFragment StoreEntitySet="InstitutionsTables">
-                <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
+          <EntitySetMapping Name="EducationalInstitutions">
+            <EntityTypeMapping TypeName="StudentPlacementModel.EducationalInstitutions">
+              <MappingFragment StoreEntitySet="EducationalInstitutions">
+                <ScalarProperty Name="EducationalInstitutionCode" ColumnName="EducationalInstitutionCode" />
                 <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UsersTable">
-            <EntityTypeMapping TypeName="ClassificationModel.UsersTable">
-              <MappingFragment StoreEntitySet="UsersTable">
-                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Miles" ColumnName="Miles" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <EntitySetMapping Name="Inlays">
+            <EntityTypeMapping TypeName="StudentPlacementModel.Inlays">
+              <MappingFragment StoreEntitySet="Inlays">
+                <ScalarProperty Name="InlayCode" ColumnName="InlayCode" />
+                <ScalarProperty Name="InlayName" ColumnName="InlayName" />
+                <ScalarProperty Name="InlayDate" ColumnName="InlayDate" />
                 <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserTypesTable">
-            <EntityTypeMapping TypeName="ClassificationModel.UserTypesTable">
-              <MappingFragment StoreEntitySet="UserTypesTable">
-                <ScalarProperty Name="UserTypeCode" ColumnName="UserTypeCode" />
-                <ScalarProperty Name="UsernameType" ColumnName="UsernameType" />
+          <EntitySetMapping Name="InlaySlot">
+            <EntityTypeMapping TypeName="StudentPlacementModel.InlaySlot">
+              <MappingFragment StoreEntitySet="InlaySlot">
+                <ScalarProperty Name="SlotCode" ColumnName="SlotCode" />
+                <ScalarProperty Name="InlayCode" ColumnName="InlayCode" />
+                <ScalarProperty Name="StudentCode" ColumnName="StudentCode" />
+                <ScalarProperty Name="NumOfClass" ColumnName="NumOfClass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="School">
+            <EntityTypeMapping TypeName="StudentPlacementModel.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="NumberOfChildrenInClass" ColumnName="NumberOfChildrenInClass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="StudentPlacementModel.Students">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentCode" ColumnName="StudentCode" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="AreaCityCode" ColumnName="AreaCityCode" />
+                <ScalarProperty Name="GradePointAverage" ColumnName="GradePointAverage" />
+                <ScalarProperty Name="SocialInvolvement" ColumnName="SocialInvolvement" />
+                <ScalarProperty Name="PreviousSchoolCode" ColumnName="PreviousSchoolCode" />
+                <ScalarProperty Name="InstitutionCode" ColumnName="InstitutionCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

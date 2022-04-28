@@ -41,15 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="DTOConstraintsForPlacementTable.cs" />
-    <Compile Include="DTOConstraintsTable.cs" />
-    <Compile Include="DTOInlayOptionsTable.cs" />
-    <Compile Include="DTOInlayTable.cs" />
-    <Compile Include="DTOInstitutionsTables.cs" />
-    <Compile Include="DTOUsersTable.cs" />
-    <Compile Include="DTOUserTypesTable.cs" />
+    <Compile Include="AreasInCityDTO.cs" />
+    <Compile Include="CitiesDTO.cs" />
+    <Compile Include="EducationalInstitutionsDTO.cs" />
+    <Compile Include="InlaysDTO.cs" />
+    <Compile Include="InlaySlotDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchoolDTO.cs" />
+    <Compile Include="StudentsDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

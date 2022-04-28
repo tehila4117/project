@@ -8,15 +8,13 @@ using DTO;
 
 namespace BL
 {
-   public class ManagerUserTypesTable
+    class AreasInCityManager
     {
-
         static DBConection db = new DBConection();
-
-        public static List<DTOUserTypesTable> GetallUserTypes()
+        public static List<AreasInCityDTO> GetallAreasInCity()
         {
-            List<UserTypesTable> list = db.GetDbSet<UserTypesTable>().ToList();
-            List<DTOUserTypesTable> dtoList = DTOUserTypesTable.CreatDtoList(list);
+            List<AreasInCity> list = db.GetDbSet<AreasInCity>().ToList();
+            List<AreasInCityDTO> dtoList = AreasInCityDTO.CreatDtoList(list);
             return dtoList;
         }
     }

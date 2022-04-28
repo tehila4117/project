@@ -12,19 +12,21 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class InlayTable
+    public partial class Inlays
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InlayTable()
+        public Inlays()
         {
-            this.ConstraintsForPlacementTable = new HashSet<ConstraintsForPlacementTable>();
+            this.InlaySlot = new HashSet<InlaySlot>();
         }
     
         public long InlayCode { get; set; }
         public string InlayName { get; set; }
-        public System.DateTime PlacementDate { get; set; }
+        public Nullable<System.DateTime> InlayDate { get; set; }
+        public Nullable<long> InstitutionCode { get; set; }
     
+        public virtual School School { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConstraintsForPlacementTable> ConstraintsForPlacementTable { get; set; }
+        public virtual ICollection<InlaySlot> InlaySlot { get; set; }
     }
 }

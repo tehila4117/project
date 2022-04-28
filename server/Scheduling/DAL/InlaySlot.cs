@@ -12,17 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ConstraintsForPlacementTable
+    public partial class InlaySlot
     {
-        public long InputCodeForPlacement { get; set; }
+        public long SlotCode { get; set; }
         public Nullable<long> InlayCode { get; set; }
-        public Nullable<long> AuthorCodeForInlay { get; set; }
-        public Nullable<long> ForcedOptionCode { get; set; }
-        public Nullable<long> ForWhomTheInlay { get; set; }
+        public Nullable<long> StudentCode { get; set; }
+        public Nullable<int> NumOfClass { get; set; }
     
-        public virtual InlayOptionsTable InlayOptionsTable { get; set; }
-        public virtual InlayTable InlayTable { get; set; }
-        public virtual UsersTable UsersTable { get; set; }
-        public virtual UsersTable UsersTable1 { get; set; }
+        public virtual Inlays Inlays { get; set; }
     }
 }

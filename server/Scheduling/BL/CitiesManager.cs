@@ -4,19 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
-using DTO;
-
 namespace BL
 {
-    public class ManagerInlayTable
+    class CitiesManager
     {
         static DBConection db = new DBConection();
-        public static List<DTOInlayTable> GetallInlay()
+
+        public static List<CitiesDTO> GetallCities()
         {
-            List<InlayTable> list = db.GetDbSet<InlayTable>().ToList();
-            List<DTOInlayTable> dtoList = DTOInlayTable.CreatDtoList(list);
+            List<Cities> list = db.GetDbSet<Cities>().ToList();
+            List<CitiesDTO> dtoList = CitiesDTO.CreatDtoList(list);
             return dtoList;
         }
-
     }
 }

@@ -12,21 +12,18 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class UserTypesTable
+    public partial class EducationalInstitutions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserTypesTable()
+        public EducationalInstitutions()
         {
-            this.ConstraintsTable = new HashSet<ConstraintsTable>();
-            this.UsersTable = new HashSet<UsersTable>();
+            this.Students = new HashSet<Students>();
         }
     
-        public string UserTypeCode { get; set; }
-        public string UsernameType { get; set; }
+        public long EducationalInstitutionCode { get; set; }
+        public string InstitutionName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConstraintsTable> ConstraintsTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsersTable> UsersTable { get; set; }
+        public virtual ICollection<Students> Students { get; set; }
     }
 }

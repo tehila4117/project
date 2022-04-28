@@ -12,26 +12,23 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class UsersTable
+    public partial class School
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UsersTable()
+        public School()
         {
-            this.ConstraintsForPlacementTable = new HashSet<ConstraintsForPlacementTable>();
-            this.ConstraintsForPlacementTable1 = new HashSet<ConstraintsForPlacementTable>();
+            this.Inlays = new HashSet<Inlays>();
+            this.Students = new HashSet<Students>();
         }
     
-        public long UserCode { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Miles { get; set; }
-        public string UserType { get; set; }
-        public Nullable<long> InstitutionCode { get; set; }
+        public long InstitutionCode { get; set; }
+        public string userName { get; set; }
+        public Nullable<int> Password { get; set; }
+        public Nullable<int> NumberOfChildrenInClass { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConstraintsForPlacementTable> ConstraintsForPlacementTable { get; set; }
+        public virtual ICollection<Inlays> Inlays { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConstraintsForPlacementTable> ConstraintsForPlacementTable1 { get; set; }
-        public virtual UserTypesTable UserTypesTable { get; set; }
+        public virtual ICollection<Students> Students { get; set; }
     }
 }

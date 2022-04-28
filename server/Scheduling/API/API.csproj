@@ -271,14 +271,6 @@
       <Project>{12f6a0e8-0718-4959-b19d-65ecbb13b194}</Project>
       <Name>BL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{C79FACBB-BB6E-4B62-BC17-E51A7B9B7DB5}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DTO\DTO.csproj">
-      <Project>{ac321fa5-edff-4d43-8556-7ba5fc8bdb32}</Project>
-      <Name>DTO</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
